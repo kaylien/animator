@@ -1,3 +1,3 @@
 public interface AnimationModel {
-//  String get
+  String getCommands();
 }
