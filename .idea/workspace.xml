@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65d21dea-420a-4cee-99c0-d7d029cc636f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ShapeImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shape.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ShapeModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ShapeModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ShapeModelImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ShapeModelImpl.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,30 +14,64 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AnimationModel.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
-              <caret line="1" column="14" lean-forward="true" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ShapeImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
+              <caret line="1" column="23" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Shape.java">
+        <entry file="file://$PROJECT_DIR$/src/ShapeModelImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="18" selection-start-column="18" selection-end-column="18" />
+            <state relative-caret-position="-289">
+              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+              <folding>
+                <element signature="e#503#504#0" expanded="true" />
+                <element signature="e#523#524#0" expanded="true" />
+                <element signature="e#559#560#0" expanded="true" />
+                <element signature="e#579#580#0" expanded="true" />
+                <element signature="e#538#539#0" expanded="true" />
+                <element signature="e#556#557#0" expanded="true" />
+                <element signature="e#647#648#0" expanded="true" />
+                <element signature="e#667#668#0" expanded="true" />
+                <element signature="e#579#580#0" expanded="true" />
+                <element signature="e#597#598#0" expanded="true" />
+                <element signature="e#737#738#0" expanded="true" />
+                <element signature="e#757#758#0" expanded="true" />
+                <element signature="e#620#621#0" expanded="true" />
+                <element signature="e#638#639#0" expanded="true" />
+                <element signature="e#827#828#0" expanded="true" />
+                <element signature="e#847#848#0" expanded="true" />
+                <element signature="e#661#662#0" expanded="true" />
+                <element signature="e#679#680#0" expanded="true" />
+                <element signature="e#917#918#0" expanded="true" />
+                <element signature="e#937#938#0" expanded="true" />
+                <element signature="e#702#703#0" expanded="true" />
+                <element signature="e#720#721#0" expanded="true" />
+                <element signature="e#1007#1008#0" expanded="true" />
+                <element signature="e#1027#1028#0" expanded="true" />
+                <element signature="e#743#744#0" expanded="true" />
+                <element signature="e#761#762#0" expanded="true" />
+                <element signature="e#949#950#0" expanded="true" />
+                <element signature="e#969#970#0" expanded="true" />
+                <element signature="e#784#785#0" expanded="true" />
+                <element signature="e#802#803#0" expanded="true" />
+                <element signature="e#1191#1192#0" expanded="true" />
+                <element signature="e#1211#1212#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ShapeModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
             </state>
           </provider>
         </entry>
@@ -60,6 +93,8 @@
       <list>
         <option value="$PROJECT_DIR$/src/AnimationModel.java" />
         <option value="$PROJECT_DIR$/src/Shape.java" />
+        <option value="$PROJECT_DIR$/src/ShapeModel.java" />
+        <option value="$PROJECT_DIR$/src/ShapeModelImpl.java" />
       </list>
     </option>
   </component>
@@ -96,7 +131,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550789497454" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550865694916" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -163,28 +198,24 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1550788540714</updated>
-      <workItem from="1550788544876" duration="935000" />
+      <workItem from="1550788544876" duration="2031000" />
+      <workItem from="1550863798837" duration="922000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="935000" />
+    <option name="totallyTimeSpent" value="2953000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24964234" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2532189" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -192,15 +223,20 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Maven" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Database" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Theme Preview" order="4" />
+      <window_info anchor="right" id="Maven" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Database" order="8" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,14 +246,55 @@
     <entry file="file://$PROJECT_DIR$/src/AnimationModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
-          <caret line="1" column="14" lean-forward="true" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
+          <caret line="1" column="23" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ShapeImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/ShapeModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        <state relative-caret-position="255">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ShapeModelImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-289">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="e#503#504#0" expanded="true" />
+            <element signature="e#523#524#0" expanded="true" />
+            <element signature="e#559#560#0" expanded="true" />
+            <element signature="e#579#580#0" expanded="true" />
+            <element signature="e#538#539#0" expanded="true" />
+            <element signature="e#556#557#0" expanded="true" />
+            <element signature="e#647#648#0" expanded="true" />
+            <element signature="e#667#668#0" expanded="true" />
+            <element signature="e#579#580#0" expanded="true" />
+            <element signature="e#597#598#0" expanded="true" />
+            <element signature="e#737#738#0" expanded="true" />
+            <element signature="e#757#758#0" expanded="true" />
+            <element signature="e#620#621#0" expanded="true" />
+            <element signature="e#638#639#0" expanded="true" />
+            <element signature="e#827#828#0" expanded="true" />
+            <element signature="e#847#848#0" expanded="true" />
+            <element signature="e#661#662#0" expanded="true" />
+            <element signature="e#679#680#0" expanded="true" />
+            <element signature="e#917#918#0" expanded="true" />
+            <element signature="e#937#938#0" expanded="true" />
+            <element signature="e#702#703#0" expanded="true" />
+            <element signature="e#720#721#0" expanded="true" />
+            <element signature="e#1007#1008#0" expanded="true" />
+            <element signature="e#1027#1028#0" expanded="true" />
+            <element signature="e#743#744#0" expanded="true" />
+            <element signature="e#761#762#0" expanded="true" />
+            <element signature="e#949#950#0" expanded="true" />
+            <element signature="e#969#970#0" expanded="true" />
+            <element signature="e#784#785#0" expanded="true" />
+            <element signature="e#802#803#0" expanded="true" />
+            <element signature="e#1191#1192#0" expanded="true" />
+            <element signature="e#1211#1212#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
