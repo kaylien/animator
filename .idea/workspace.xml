@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8cfbd0c2-a5db-43ab-80b0-09f5587f27f3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ShapeModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ShapeModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ShapeModelImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ShapeModelImpl.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,8 +26,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ShapeModelImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="81" selection-end-column="3" />
+            <state>
+              <caret column="38" selection-start-column="38" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -33,8 +35,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ShapeModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+            <state relative-caret-position="315">
+              <caret line="21" column="99" selection-start-line="21" selection-start-column="99" selection-end-line="21" selection-end-column="99" />
             </state>
           </provider>
         </entry>
@@ -42,9 +44,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Command.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2">
-              <caret line="35" column="35" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
+            <state relative-caret-position="472">
+              <caret line="60" column="49" selection-start-line="60" selection-start-column="49" selection-end-line="60" selection-end-column="49" />
               <folding>
+                <element signature="e#1070#1071#0" expanded="true" />
+                <element signature="e#1092#1093#0" expanded="true" />
                 <element signature="e#1046#1047#0" expanded="true" />
                 <element signature="e#1066#1067#0" expanded="true" />
                 <element signature="e#1089#1090#0" expanded="true" />
@@ -76,15 +80,6 @@
                 <element signature="e#1676#1677#0" expanded="true" />
                 <element signature="e#1696#1697#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
@@ -141,6 +136,8 @@
         <option value="$PROJECT_DIR$/src/cs3500/marblesolitaire/MarbleSolitaire.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
+        <option value="$PROJECT_DIR$/src/ShapeModelImpl.java" />
+        <option value="$PROJECT_DIR$/src/ShapeModel.java" />
         <option value="$PROJECT_DIR$/src/Command.java" />
       </list>
     </option>
@@ -163,11 +160,6 @@
             <path>
               <item name="hw05" type="b2602c69:ProjectViewProjectNode" />
               <item name="hw05" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hw05" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hw05" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="hw05" type="b2602c69:ProjectViewProjectNode" />
@@ -387,7 +379,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62752000" />
+    <option name="totallyTimeSpent" value="64110000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -500,20 +492,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ShapeModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ShapeModelImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="81" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -521,11 +499,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ShapeModelImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="38" selection-start-column="38" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ShapeModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="99" selection-start-line="21" selection-start-column="99" selection-end-line="21" selection-end-column="99" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Command.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2">
-          <caret line="35" column="35" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
+        <state relative-caret-position="472">
+          <caret line="60" column="49" selection-start-line="60" selection-start-column="49" selection-end-line="60" selection-end-column="49" />
           <folding>
+            <element signature="e#1070#1071#0" expanded="true" />
+            <element signature="e#1092#1093#0" expanded="true" />
             <element signature="e#1046#1047#0" expanded="true" />
             <element signature="e#1066#1067#0" expanded="true" />
             <element signature="e#1089#1090#0" expanded="true" />

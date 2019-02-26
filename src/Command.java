@@ -46,6 +46,27 @@ public class Command {
     this.t = command.getT();
   }
 
+  // Hashing by making the start time the key
+  @Override
+  public int hashCode() {
+    return getT();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null || getClass() != obj.getClass()) {
+      return false;
+    }
+
+    Command cmd = (Command) obj;
+    return x == cmd.getX() && y == cmd.getY() && w == cmd.getW() && h == cmd.getH() &&
+      r == cmd.getR() && g == cmd.getG() && b == cmd.getB() && t == cmd.getT();
+  }
+
   public int getX() { return x; }
 
   public void setX(int x) {
@@ -108,5 +129,6 @@ public class Command {
     this.y = y;
   }
 
+  //TODO: Create an equals method
 
 }
