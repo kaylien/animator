@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public interface ShapeModel {
+public interface ShapeInt {
 
   /**
    * What does the model represent?
@@ -24,6 +24,10 @@ public interface ShapeModel {
    * List<Shape<Map<Int,Command>>> where the Int is the start time
    *
    * Shapes should be able to do multiple things simultaneously without having the same start times
+   *
+   * The same variable can't be changing at the same time
+   * Command constraints for variables (ex. rgb < 255)
+   *
    */
 
   /**
@@ -36,7 +40,7 @@ public interface ShapeModel {
    * TODO: Remember to return with copies of commands
    * @return a list of existing Commands that a Shape has
    */
-  public ArrayList<Command> getCommands();
+  public String getCommands();
 
   /**
    * Adds a list of commands to a Shape

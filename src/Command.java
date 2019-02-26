@@ -8,8 +8,9 @@ import java.util.Set;
  * - Color values between 0 and 255
  */
 public class Command {
-  private int x, y, w, h, r, g, b, t;
+  private int x, y, w, h, r, g, b, t, et;
 
+  //TODO: Fix errors
   enum Error {
     LESS_THAN_0(0, "Cannot create a command with an argument less than 0."),
     ILLEGAL_COLOR(1, "Color inputs must be between 0 and 255.");
@@ -50,8 +51,9 @@ public class Command {
    * @param g green
    * @param b blue
    * @param t tick
+   * @param et end tick
    */
-  public Command(int x, int y, int w, int h, int r, int g, int b, int t) {
+  public Command(int x, int y, int w, int h, int r, int g, int b, int t, int et) {
     if (x < 0 || y < 0 || w < 0 || h < 0 ||r < 0 || g < 0 || b < 0 || t < 0) {
       throw new IllegalArgumentException("Cannot create a command with an argument less than 0.");
     }
@@ -68,6 +70,7 @@ public class Command {
     this.g = g;
     this.b = b;
     this.t = t;
+    this.et = et;
   }
 
   //TODO: Make error commands
