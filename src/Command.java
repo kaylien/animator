@@ -1,12 +1,24 @@
-
+/**
+ * TODO: Class comment
+ */
 public class Command {
-
-  /**
-   * Describes the motions of shape R, between two moments of animation: t == tick,
-   * (x,y) == position, (w,h) == dimensions, (r,g,b) == color (with values between 0 and 255).
-   */
   private int x, y, w, h, r, g, b, t;
 
+  /**
+   * TODO: Constructor comments
+   *
+   * Describes the motions of shape R, between two moments of animation: t == tick,
+   * (x,y) == position, (w,h) == dimensions, (r,g,b) == color (with values between 0 and 255).
+   *
+   * @param x
+   * @param y
+   * @param w
+   * @param h
+   * @param r
+   * @param g
+   * @param b
+   * @param t
+   */
   public Command(int x, int y, int w, int h, int r, int g, int b, int t) {
     this.x = x;
     this.y = y;
@@ -18,7 +30,11 @@ public class Command {
     this.t = t;
   }
 
-  // Copy constructor
+
+  /**
+   * TODO: Copy constructor comment
+   * @param command
+   */
   public Command(Command command) {
     this.x = command.getX();
     this.y = command.getY();
