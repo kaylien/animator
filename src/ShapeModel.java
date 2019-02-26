@@ -20,7 +20,8 @@ public interface ShapeModel {
    * Need to throw IllegalArgumentExceptions if we are trying to add in time-conflicting commands
    * with existing commands -> will have to say delete commands first
    *
-   * Maybe sort the shape commands by sorting key values in a hashMap
+   * Maybe sort the shape commands by sorting key values in a hashMap (Collections.sort())
+   * List<Shape<Map<Int,Command>>> where the Int is the start time
    *
    * Shapes should be able to do multiple things simultaneously without having the same start times
    */

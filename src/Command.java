@@ -1,5 +1,11 @@
+import java.util.Set;
+
 /**
  * TODO: Class comment
+ * TODO: Create all class invariants & enforce them
+ * Invariants:
+ * - No negative arguments
+ * - Color values between 0 and 255
  */
 public class Command {
   private int x, y, w, h, r, g, b, t;
@@ -10,16 +16,24 @@ public class Command {
    * Describes the motions of shape R, between two moments of animation: t == tick,
    * (x,y) == position, (w,h) == dimensions, (r,g,b) == color (with values between 0 and 255).
    *
-   * @param x
-   * @param y
-   * @param w
-   * @param h
-   * @param r
-   * @param g
-   * @param b
-   * @param t
+   * @param x position x
+   * @param y position y
+   * @param w width
+   * @param h height
+   * @param r red
+   * @param g green
+   * @param b blue
+   * @param t tick
    */
   public Command(int x, int y, int w, int h, int r, int g, int b, int t) {
+    if (x < 0 || y < 0 || w < 0 || h < 0 ||r < 0 || g < 0 || b < 0 || t < 0) {
+      throw new IllegalArgumentException("Cannot create a command with an argument less than 0.");
+    }
+
+    if (r > 255 || g > 255 || b > 255) {
+      throw new IllegalArgumentException("Color inputs must be between 0 and 255.");
+    }
+
     this.x = x;
     this.y = y;
     this.w = w;
