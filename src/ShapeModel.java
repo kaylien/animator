@@ -43,5 +43,10 @@ public interface ShapeModel {
    */
   public void addCommands(Command... commands);
 
+  /**
+   * Deletes a list of commands from a Shape
+   * @param commands the list of commands to be deleted
+   */
+  public void deleteCommands(Command... commands);
 
 }

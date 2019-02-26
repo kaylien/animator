@@ -4,6 +4,6 @@ public abstract class ShapeModelImpl {
     //helper method for addCommands
   }
 
-  
+
 
 }
