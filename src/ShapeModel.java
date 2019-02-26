@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public interface ShapeModel {
 
   /**
@@ -21,6 +24,24 @@ public interface ShapeModel {
    *
    * Shapes should be able to do multiple things simultaneously without having the same start times
    */
+
+  /**
+   *
+   * @return a list of
+   */
+//  public List<String> possibleCommands();
+
+  /**
+   * TODO: Remember to return with copies of commands
+   * @return a list of existing Commands that a Shape has
+   */
+  public ArrayList<Command> getCommands();
+
+  /**
+   * Adds a list of commands to a Shape
+   * @param commands the list of commands to be executed
+   */
+  public void addCommands(Command... commands);
 
 
 }

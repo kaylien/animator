@@ -1,7 +1,9 @@
 public abstract class ShapeModelImpl {
 
-  ShapeModelImpl() {
-
+  private void addCommand(Command command) {
+    //helper method for addCommands
   }
+
+  
 
 }

@@ -129,6 +129,4 @@ public class Command {
     this.y = y;
   }
 
-  //TODO: Create an equals method
-
 }
