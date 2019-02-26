@@ -10,6 +10,32 @@ import java.util.Set;
 public class Command {
   private int x, y, w, h, r, g, b, t;
 
+  enum Error {
+    LESS_THAN_0(0, "Cannot create a command with an argument less than 0."),
+    ILLEGAL_COLOR(1, "Color inputs must be between 0 and 255.");
+
+    private final int code;
+    private final String description;
+
+    private Error(int code, String description) {
+      this.code = code;
+      this.description = description;
+    }
+
+    public String getDescription() {
+      return description;
+    }
+
+    public int getCode() {
+      return code;
+    }
+
+    @Override
+    public String toString() {
+      return code + ": " + description;
+    }
+
+  }
   /**
    * TODO: Constructor comments
    *
@@ -43,6 +69,8 @@ public class Command {
     this.b = b;
     this.t = t;
   }
+
+  //TODO: Make error commands
 
 
   /**
