@@ -1,3 +1,6 @@
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -5,7 +8,10 @@ import java.util.List;
 import java.util.Set;
 
 public abstract class ShapeImpl implements ShapeInt{
-  private int x, y, w, h, r, g, b, t;
+  private int t;
+  private Color color;
+  private Point position;
+  private Dimension dimension;
 
   // Integer will be tick
   HashMap<Integer, List<Command>> commands;
@@ -21,26 +27,18 @@ public abstract class ShapeImpl implements ShapeInt{
    * @param b
    */
   ShapeImpl(int x, int y, int w, int h, int r, int g, int b) {
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-    this.r = r;
-    this.g = g;
-    this.b = b;
 
+    this.color = new Color(r, g, b);
+    this.position = new Point(x, y);
+    this.dimension = new Dimension(w, h);
     commands = new HashMap<>();
   }
 
   // Copy constructor
   ShapeImpl(ShapeImpl shape) {
-    this.x = shape.x;
-    this.y = shape.y;
-    this.w = shape.w;
-    this.h = shape.h;
-    this.r = shape.r;
-    this.g = shape.g;
-    this.b = shape.b;
+    this.color = shape.color;
+    this.position = shape.position;
+    this.dimension = shape.dimension;
   }
 
   private void addCommand(Command command) {
