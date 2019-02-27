@@ -1,8 +1,4 @@
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Point;
 import java.util.Set;
-import javax.swing.text.Position;
 
 /**
  * TODO: Class comment
@@ -15,7 +11,7 @@ import javax.swing.text.Position;
 public class Command {
   private int t, et;
   private Color color;
-  private Point position;
+  private Position position;
   private Dimension dimension;
 
   //TODO: Fix errors
@@ -67,7 +63,7 @@ public class Command {
     }
 
     this.color = new Color(r, g, b);
-    this.position = new Point(x, y);
+    this.position = new Position(x, y);
     this.dimension = new Dimension(w, h);
     this.t = t;
     this.et = et;
@@ -112,13 +108,13 @@ public class Command {
     return color;
   }
 
-  public void setColor(int r, int g, int b) {
-    this.color = new Color(r, g, b);
-  }
-
-  public void setR(int r) {
-    color = new Color(r, color.getGreen(), color.getBlue());
-  }
+//  public void setColor(int r, int g, int b) {
+//    this.color = new Color(r, g, b);
+//  }
+//
+//  public void setR(int r) {
+//    color = new Color(r, color.getGreen(), color.getBlue());
+//  }
 
   public Dimension getDimension() {
     return dimension;
@@ -128,13 +124,13 @@ public class Command {
     this.dimension = dimension;
   }
 
-  public Point getPosition() {
+  public Position getPosition() {
     return position;
   }
 
-  public void setPosition(int x, int y) {
-    this.position = new Point(x, y);
-  }
+//  public void setPosition(int x, int y) {
+//    this.position = new Point(x, y);
+//  }
 
   public int getT() {
     return t;

@@ -1,6 +1,3 @@
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -10,7 +7,7 @@ import java.util.Set;
 public abstract class ShapeImpl implements ShapeInt{
   private int t;
   private Color color;
-  private Point position;
+  private Position position;
   private Dimension dimension;
 
   // Integer will be tick
@@ -29,7 +26,7 @@ public abstract class ShapeImpl implements ShapeInt{
   ShapeImpl(int x, int y, int w, int h, int r, int g, int b) {
 
     this.color = new Color(r, g, b);
-    this.position = new Point(x, y);
+    this.position = new Position(x, y);
     this.dimension = new Dimension(w, h);
     commands = new HashMap<>();
   }
