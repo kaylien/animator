@@ -52,7 +52,7 @@ public abstract class ShapeImpl implements ShapeInt{
       commands.put(command.getT(), new ArrayList<>());
     }
   }
-
+  
   private boolean validCommand(Command command) {
     return true;
   }
