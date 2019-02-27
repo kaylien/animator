@@ -14,33 +14,34 @@ public class Command {
   private Position position;
   private Dimension dimension;
 
-  //TODO: Fix errors
-  enum Error {
-    LESS_THAN_0(0, "Cannot create a command with an argument less than 0."),
-    ILLEGAL_COLOR(1, "Color inputs must be between 0 and 255.");
+//  //TODO: Errors handled in Object classes now
+//  enum Error {
+//    LESS_THAN_0(0, "Cannot create a command with an argument less than 0."),
+//    ILLEGAL_COLOR(1, "Color inputs must be between 0 and 255.");
+//
+//    private final int code;
+//    private final String description;
+//
+//    private Error(int code, String description) {
+//      this.code = code;
+//      this.description = description;
+//    }
+//
+//    public String getDescription() {
+//      return description;
+//    }
+//
+//    public int getCode() {
+//      return code;
+//    }
+//
+//    @Override
+//    public String toString() {
+//      return code + ": " + description;
+//    }
+//
+//  }
 
-    private final int code;
-    private final String description;
-
-    private Error(int code, String description) {
-      this.code = code;
-      this.description = description;
-    }
-
-    public String getDescription() {
-      return description;
-    }
-
-    public int getCode() {
-      return code;
-    }
-
-    @Override
-    public String toString() {
-      return code + ": " + description;
-    }
-
-  }
   /**
    * TODO: Constructor comments
    *
@@ -58,8 +59,9 @@ public class Command {
    * @param et end tick
    */
   public Command(int x, int y, int w, int h, int r, int g, int b, int t, int et) {
-    if (x < 0 || y < 0 || w < 0 || h < 0 ||r < 0 || g < 0 || b < 0 || t < 0) {
-      throw new IllegalArgumentException("Cannot create a command with an argument less than 0.");
+    if (et < 0 || t < 0) {
+      throw new IllegalArgumentException("Cannot create a command with start or end time" +
+        " less than 0.");
     }
 
     this.color = new Color(r, g, b);
@@ -81,6 +83,7 @@ public class Command {
     this.position = command.getPosition();
     this.dimension = command.getDimension();
     this.t = command.getT();
+    this.et = command.getEt();
   }
 
   // Hashing by making the start time the key
@@ -100,21 +103,17 @@ public class Command {
     }
 
     Command cmd = (Command) obj;
-    return color == cmd.getColor() && dimension == cmd.dimension && position == cmd.getPosition()
-      && t == cmd.getT();
+    return color == cmd.getColor() && dimension == cmd.getDimension()
+      && position == cmd.getPosition() && t == cmd.getT();
   }
 
   public Color getColor() {
     return color;
   }
 
-//  public void setColor(int r, int g, int b) {
-//    this.color = new Color(r, g, b);
-//  }
-//
-//  public void setR(int r) {
-//    color = new Color(r, color.getGreen(), color.getBlue());
-//  }
+  public void setColor(int r, int g, int b) {
+    this.color = new Color(r, g, b);
+  }
 
   public Dimension getDimension() {
     return dimension;
@@ -128,9 +127,9 @@ public class Command {
     return position;
   }
 
-//  public void setPosition(int x, int y) {
-//    this.position = new Point(x, y);
-//  }
+  public void setPosition(int x, int y) {
+    this.position = new Position(x, y);
+  }
 
   public int getT() {
     return t;
