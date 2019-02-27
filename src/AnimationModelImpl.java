@@ -10,6 +10,7 @@ import java.util.Set;
 public class AnimationModelImpl implements AnimationModel {
   List<ShapeImpl> shapeList;
 
+
   AnimationModelImpl(){
     shapeList = new ArrayList<>();
   }
