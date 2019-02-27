@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Point;
 import java.util.Set;
 import javax.swing.text.Position;
@@ -11,9 +12,10 @@ import javax.swing.text.Position;
  * - Color values between 0 and 255 (ENFORCED by using the Color class)
  */
 public class Command {
-  private int w, h, t, et;
+  private int t, et;
   private Color color;
   private Point position;
+  private Dimension dimension;
 
   //TODO: Fix errors
   enum Error {
@@ -65,8 +67,7 @@ public class Command {
 
     this.color = new Color(r, g, b);
     this.position = new Point(x, y);
-    this.w = w;
-    this.h = h;
+    this.dimension = new Dimension(w, h);
     this.t = t;
     this.et = et;
   }
@@ -81,8 +82,7 @@ public class Command {
   public Command(Command command) {
     this.color = command.getColor();
     this.position = command.getPosition();
-    this.w = command.getW();
-    this.h = command.getH();
+    this.dimension = command.getDimension();
     this.t = command.getT();
   }
 
@@ -103,8 +103,8 @@ public class Command {
     }
 
     Command cmd = (Command) obj;
-    return color == cmd.getColor() && w == cmd.getW() && h == cmd.getH() &&
-      position == cmd.getPosition() && t == cmd.getT();
+    return color == cmd.getColor() && dimension == cmd.dimension && position == cmd.getPosition()
+      && t == cmd.getT();
   }
 
   public Color getColor() {
@@ -113,6 +113,18 @@ public class Command {
 
   public void setColor(int r, int g, int b) {
     this.color = new Color(r, g, b);
+  }
+
+  public void setR(int r) {
+    color = new Color(r, color.getGreen(), color.getBlue());
+  }
+
+  public Dimension getDimension() {
+    return dimension;
+  }
+
+  public void setDimension(Dimension dimension) {
+    this.dimension = dimension;
   }
 
   public Point getPosition() {
@@ -129,22 +141,6 @@ public class Command {
 
   public void setT(int t) {
     this.t = t;
-  }
-
-  public int getW() {
-    return w;
-  }
-
-  public void setW(int w) {
-    this.w = w;
-  }
-
-  public int getH() {
-    return h;
-  }
-
-  public void setH(int h) {
-    this.h = h;
   }
 
   public int getEt() {
