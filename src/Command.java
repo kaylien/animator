@@ -1,14 +1,19 @@
+import java.awt.Color;
+import java.awt.Point;
 import java.util.Set;
+import javax.swing.text.Position;
 
 /**
  * TODO: Class comment
  * TODO: Create all class invariants & enforce them
  * Invariants:
  * - No negative arguments
- * - Color values between 0 and 255
+ * - Color values between 0 and 255 (ENFORCED by using the Color class)
  */
 public class Command {
-  private int x, y, w, h, r, g, b, t, et;
+  private int w, h, t, et;
+  private Color color;
+  private Point position;
 
   //TODO: Fix errors
   enum Error {
@@ -58,17 +63,10 @@ public class Command {
       throw new IllegalArgumentException("Cannot create a command with an argument less than 0.");
     }
 
-    if (r > 255 || g > 255 || b > 255) {
-      throw new IllegalArgumentException("Color inputs must be between 0 and 255.");
-    }
-
-    this.x = x;
-    this.y = y;
+    this.color = new Color(r, g, b);
+    this.position = new Point(x, y);
     this.w = w;
     this.h = h;
-    this.r = r;
-    this.g = g;
-    this.b = b;
     this.t = t;
     this.et = et;
   }
@@ -81,13 +79,10 @@ public class Command {
    * @param command
    */
   public Command(Command command) {
-    this.x = command.getX();
-    this.y = command.getY();
+    this.color = command.getColor();
+    this.position = command.getPosition();
     this.w = command.getW();
     this.h = command.getH();
-    this.r = command.getR();
-    this.g = command.getG();
-    this.b = command.getB();
     this.t = command.getT();
   }
 
@@ -108,38 +103,24 @@ public class Command {
     }
 
     Command cmd = (Command) obj;
-    return x == cmd.getX() && y == cmd.getY() && w == cmd.getW() && h == cmd.getH() &&
-      r == cmd.getR() && g == cmd.getG() && b == cmd.getB() && t == cmd.getT();
+    return color == cmd.getColor() && w == cmd.getW() && h == cmd.getH() &&
+      position == cmd.getPosition() && t == cmd.getT();
   }
 
-  public int getX() { return x; }
-
-  public void setX(int x) {
-    this.x = x;
+  public Color getColor() {
+    return color;
   }
 
-  public int getB() {
-    return b;
+  public void setColor(int r, int g, int b) {
+    this.color = new Color(r, g, b);
   }
 
-  public void setB(int b) {
-    this.b = b;
+  public Point getPosition() {
+    return position;
   }
 
-  public int getG() {
-    return g;
-  }
-
-  public void setG(int g) {
-    this.g = g;
-  }
-
-  public int getR() {
-    return r;
-  }
-
-  public void setR(int r) {
-    this.r = r;
+  public void setPosition(int x, int y) {
+    this.position = new Point(x, y);
   }
 
   public int getT() {
@@ -166,12 +147,11 @@ public class Command {
     this.h = h;
   }
 
-  public int getY() {
-    return y;
+  public int getEt() {
+    return et;
   }
 
-  public void setY(int y) {
-    this.y = y;
+  public void setEt(int et) {
+    this.et = et;
   }
-
 }
