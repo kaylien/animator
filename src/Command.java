@@ -10,6 +10,7 @@ import javax.swing.text.Position;
  * Invariants:
  * - No negative arguments
  * - Color values between 0 and 255 (ENFORCED by using the Color class)
+ * - Dimension allows negative values, have to check for that
  */
 public class Command {
   private int t, et;
