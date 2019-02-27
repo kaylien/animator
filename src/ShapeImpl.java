@@ -46,6 +46,9 @@ public abstract class ShapeImpl implements ShapeInt{
   private void addCommand(Command command) {
     int key = command.getT();
 
+    if (!this.validCommand(command)) {
+      throw new IllegalArgumentException("Invalid Command");
+    }
     if (commands.containsKey(key)) {
       commands.get(key).add(command);
     }
@@ -53,6 +56,38 @@ public abstract class ShapeImpl implements ShapeInt{
       commands.put(command.getT(), new ArrayList<>());
     }
   }
+
+  private boolean validCommand(Command command) {
+    return true;
+  }
+/*
+  private boolean validCommand(Command command) {
+    for (c : this.commands) {
+      int startC0 = c.getT();
+      int endC0 = c.getET();
+      int startC1 = command.getT();
+      int endC1 = command.getET();
+      if(startC1 >= startC0 && startC1 <= endC0 || endC1 >= startC0 && endC1 <= endC0 ) {
+        if(conflictingVariable(c,command)) {
+          return false;
+        } else {
+          continue;
+        }
+      }
+    }
+    return true;
+  }
+
+  private static boolean conflictingVariable(Command c1, Command c2) {
+    return c1.getB() != c2.getB() &&
+      c1.getG() != c2.getG() &&
+    c1.getR() != c2.getR() &&
+    c1.getX() != c2.getX() &&
+    c1.getY() != c2.getY() &&
+    c1.getW() != c2.getW() &&
+    c1.getH() != c2.getH();
+  }
+*/
 
   @Override
   public void addCommands(Command... commands) {
