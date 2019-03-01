@@ -35,19 +35,53 @@ public abstract class ShapeImpl implements ShapeInt{
 
   private void addCommand(Command command) {
     int key = command.getT();
-
-    if (!this.validCommand(command)) {
+    List<Command> loc = splitCommand(command);
+    if (!this.validCommand(loc)) {
       throw new IllegalArgumentException("Invalid Command");
     }
-
-    if (commands.containsKey(key)) {
-      commands.get(key).add(command);
-    }
     else {
-      commands.put(command.getT(),command);
+      this.mergeCommands(loc);
     }
   }
 
+  public void mergeCommands(List<Command> loc) {
+    for (Command c : loc) {
+      int key = c.getT();
+      if (this.commands.containsKey(key)) {
+        mergeCommand(key,c);
+      } else {
+        this.commands.put(key,c);
+      }
+    }
+  }
+
+
+  public void mergeCommand(int key, Command command) {
+    command.g
+  }
+
+  private static List<Command> splitCommand(Command command) {
+    int n = command.getEt() - command.getT();
+    ArrayList<Command> result = new ArrayList<>();
+    for (int i = 0; i < n ; i++) {
+      Command current_state = tickState(command,n,i);
+      result.add(current_state);
+    }
+    return result;
+  }
+
+  private static Command tickState(Command c, int n, int i) {
+    int multiplier = (1+i/n);
+    int r = c.getColor().getR() * multiplier;
+    int g = c.getColor().getG() * multiplier;
+    int b = c.getColor().getB() * multiplier;
+    int w = c.getDimension().getW() * multiplier;
+    int h = c.getDimension().getH() * multiplier;
+    int x = c.getPosition().getX() * multiplier;
+    int y = c.getPosition().getY() * multiplier;
+    int t = c.getT() * multiplier;
+    return new Command(x,y,w,h,r,g,b,t,c.getEt());
+  }
   /**
    * Given a command, what is it changing?
    * Get tick last prior to the start time of the command, pull out the command
@@ -57,10 +91,9 @@ public abstract class ShapeImpl implements ShapeInt{
    * @return
    */
 
-  private boolean validCommand(Command command) {
-    Collection<Command> listOfCommands = commands.values();
-    Collection<Command> locII = splitCommand(Command);
-    for (Command c : locII) {
+  private boolean validCommand(List<Command> loc) {
+    Collection<Command> loc0 = commands.values();
+    for (Command c : loc) {
 
     }
 
