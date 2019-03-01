@@ -135,10 +135,10 @@ public abstract class ShapeImpl implements ShapeInt{
     COLOR, DIMENSION, POSITION;
   }
 
-  private boolean isChangingSameVar(List<List<Integer>> v1, List<List<Integer>> v2) {
-    int n = v1.size();
+  private boolean isChangingSameVar(Command c1, Command c2) {
+    int n = c1.size();
     for (int i = 0; i< n; i++) {
-      List<Integer> current_row = v1.get(i);
+      List<Integer> current_row = .get(i);
       int n_j = current_row.size();
       for (int j = 0 ; j < n_j ; j++) {
         if (v1.get(i).get(j) != v2.get(i).get(j)) {
@@ -161,7 +161,7 @@ public abstract class ShapeImpl implements ShapeInt{
     return result;
   }
 
-  static private List<Integer> whatVarsChanging(Command c1, Command c2) {
+  static private List<Variable> whatVarsChanging(Command c1, Command c2) {
     List<Integer> list = new ArrayList<>();
 
     int c = c1.getColor() != c2.getColor() ? 1 : 0;
