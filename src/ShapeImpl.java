@@ -187,7 +187,13 @@ public abstract class ShapeImpl implements ShapeInt{
   }
 
   private boolean isSameTimeFrame(Command c1, Command c2) {
-    return true;
+    int c1st = c1.getT();
+    int c1et = c1.getEt();
+    int c2st = c2.getT();
+    int c2et = c2.getEt();
+
+    return (c1et > c2st && c1st < c2st) || (c1st > c2st && c1st < c2et) ||
+      (c1st > c2st && c1et < c2et) || (c1st < c2st && c1et > c2et);
   }
 
 }
