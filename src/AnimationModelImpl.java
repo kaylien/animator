@@ -38,6 +38,14 @@ public class AnimationModelImpl implements AnimationModel {
     return result;
   }
 
+  private List<ShapeInt> copyShapeList() {
+    List<ShapeImpl> result = new ArrayList<>();
+    for(ShapeInt s: shapeList) {
+      ShapeImpl copy = new ShapeImpl(s);
+      result.add(copy);
+    }
+    return copyShapeList();
+  }
   @Override
   public String queryShapes() {
     String result = "";
