@@ -109,44 +109,35 @@ public abstract class ShapeImpl implements ShapeInt{
   }
 
 
+  private enum Variable {
+    COLOR, DIMENSION, POSITION;
+  }
+
   /**
    * @param c
    * @return
    */
   private boolean validCommand(Command c) {
-    int key = c.getT();
-    boolean isValid = true;
+    List<Variable> v2 = whatVarsChanging(c, commands.get(c.getEt()));
 
-    if (!(commands.lowerKey(key) == null)) {
-      Command priorCmd = commands.get(commands.lowerKey(key));
+    for (int key = 0; key < commands.size() - 1; key++) {
+      Command command = commands.get(key);
+      Command nextCmd = commands.get(key + 1);
+      List<Variable> v1 = whatVarsChanging(command, nextCmd);
 
-      isValid = isSameTimeFrame(c, priorCmd) && isChangingSameVar(c, priorCmd);
-    }
-
-    if (!(commands.higherKey(key) == null)) {
-      Command afterCmd = commands.get(commands.higherKey(key));
-    }
-
-    return isValid;
-
-  }
-
-  private enum Variable {
-    COLOR, DIMENSION, POSITION;
-  }
-
-  private boolean isChangingSameVar(List<List<Integer>> v1, List<List<Integer>> v2) {
-    int n = v1.size();
-    for (int i = 0; i< n; i++) {
-      List<Integer> current_row = v1.get(i);
-      int n_j = current_row.size();
-      for (int j = 0 ; j < n_j ; j++) {
-        if (v1.get(i).get(j) != v2.get(i).get(j)) {
-          return true;
-        }
+      if (isSameTimeFrame(command, c) && isChangingSameVar(v1, v2)) {
+        return true;
       }
     }
+
     return false;
+  }
+
+
+  private boolean isChangingSameVar(List<Variable> v1, List<Variable> v2) {
+    return v1.contains(Variable.COLOR) && v2.contains(Variable.COLOR) ||
+      v1.contains(Variable.POSITION) && v2.contains(Variable.POSITION) ||
+      v1.contains(Variable.DIMENSION) && v2.contains(Variable.DIMENSION);
   }
 
 
