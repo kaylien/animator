@@ -31,6 +31,8 @@ public abstract class ShapeImpl implements ShapeInt{
     this.position = new Position(x, y);
     this.dimension = new Dimension(w, h);
     commands = new TreeMap<>();
+    Command cmd = new Command(x, y, w, h, r, g, b, 0, 0);
+    commands.put(0, cmd);
   }
 
   // Copy constructor
@@ -50,13 +52,14 @@ public abstract class ShapeImpl implements ShapeInt{
 
   private void addCommand (Command c) {
     int key = c.getT();
+    int endKey = c.getEt();
 
-    if (!(validCommand(c))) {
-      throw new IllegalArgumentException("Invalid command");
-    }
+//    if (!(validCommand(c))) {
+//      throw new IllegalArgumentException("Invalid command");
+//    }
 
-    commands.put(key, c);
-    fixCommands(c.getT(), c.getEt());
+    commands.put(endKey, c);
+    fixCommands(key, endKey);
   }
 
 
@@ -71,6 +74,9 @@ public abstract class ShapeImpl implements ShapeInt{
 
     for (Integer key : keys) {
       Command cmd = commandList.get(key);
+      if (commandList.higherKey(key) == null) {
+        return;
+      }
       int keyDiff = key - commandList.higherKey(key);
       float multiplier = keyDiff / deltaTime;
 

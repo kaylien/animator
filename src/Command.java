@@ -157,9 +157,9 @@ public class Command {
     return "".join(" ",
       String.valueOf(getT()),
       String.valueOf(getEt()),
-      getDimension().toStringV2(),
       getPosition().toStringV2(),
-      getColor().toStringV2());
+      getColor().toStringV2(),
+      getDimension().toStringV2());
   }
 
 }
