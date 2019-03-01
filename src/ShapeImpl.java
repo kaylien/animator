@@ -1,4 +1,10 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.NavigableMap;
+import java.util.Set;
+import java.util.TreeMap;
 
 public abstract class ShapeImpl implements ShapeInt{
   private int t;
@@ -6,7 +12,6 @@ public abstract class ShapeImpl implements ShapeInt{
   private Position position;
   private Dimension dimension;
   private TreeMap<Integer, Command> commands;
-
 
   /**
    *
@@ -23,7 +28,7 @@ public abstract class ShapeImpl implements ShapeInt{
     this.color = new Color(r, g, b);
     this.position = new Position(x, y);
     this.dimension = new Dimension(w, h);
-    commands = new TreeMap<Integer, Command>();
+    commands = new TreeMap<>();
   }
 
   // Copy constructor
@@ -36,94 +41,74 @@ public abstract class ShapeImpl implements ShapeInt{
   private void addCommand(Command command) {
     int key = command.getT();
     List<Command> loc = splitCommand(command);
-    if (!this.validCommand(loc)) {
-      throw new IllegalArgumentException("Invalid Command");
+    if (!this.validCommands(loc)) {
+        throw new IllegalArgumentException("Invalid Command");
+      } else {
+        this.mergeCommands(loc);
+      }
     }
-    else {
-      this.mergeCommands(loc);
-    }
-  }
 
   public void mergeCommands(List<Command> loc) {
     for (Command c : loc) {
       int key = c.getT();
       if (this.commands.containsKey(key)) {
-        mergeCommand(key,c);
+        this.commands.replace(key,c);
       } else {
         this.commands.put(key,c);
       }
     }
   }
 
-
-  public void mergeCommand(int key, Command command) {
-    command.g
-  }
-
   private static List<Command> splitCommand(Command command) {
     int n = command.getEt() - command.getT();
-    ArrayList<Command> result = new ArrayList<>();
+    List<Command> result = new ArrayList<Command>();
     for (int i = 0; i < n ; i++) {
       Command current_state = tickState(command,n,i);
       result.add(current_state);
     }
+    //needs to be reversed before returned
     return result;
   }
 
   private static Command tickState(Command c, int n, int i) {
-    int multiplier = (1+i/n);
-    int r = c.getColor().getR() * multiplier;
-    int g = c.getColor().getG() * multiplier;
-    int b = c.getColor().getB() * multiplier;
-    int w = c.getDimension().getW() * multiplier;
-    int h = c.getDimension().getH() * multiplier;
-    int x = c.getPosition().getX() * multiplier;
-    int y = c.getPosition().getY() * multiplier;
-    int t = c.getT() * multiplier;
+    int multiplier = (1-i/n);
+    int r = Math.round(c.getColor().getR() * multiplier);
+    int g = Math.round(c.getColor().getG() * multiplier);
+    int b = Math.round(c.getColor().getB() * multiplier);
+    int w = Math.round(c.getDimension().getW() * multiplier);
+    int h = Math.round(c.getDimension().getH() * multiplier);
+    //making a linear movement for x and y???
+    int x = Math.round(c.getPosition().getX() * multiplier);
+    int y = Math.round(c.getPosition().getY() * multiplier);
+    //index???
+    int t = c.getEt() - i;
     return new Command(x,y,w,h,r,g,b,t,c.getEt());
   }
+
   /**
-   * Given a command, what is it changing?
-   * Get tick last prior to the start time of the command, pull out the command
-   * Compare that command to the given command
-   * What's changing?
-   * @param command
+   * @param loc
    * @return
    */
-
-  private boolean validCommand(List<Command> loc) {
-    Collection<Command> loc0 = commands.values();
-    for (Command c : loc) {
-
-    }
-
-    int key = command.getT();
-    if (commands.get(command.getT()) == null) {
-      //get the command right before and right after to the new command
-      int lastKey = commands.lowerKey(command.getT());
-      int nextKey = commands.higherKey(command.getT());
-      Command lastCommand = commands.get(lastKey);
-      Command nextCommand = commands.get(nextKey);
+  private boolean validCommands(List<Command> loc) {
+    //data structs man
+    List<Command> loc0 = commands.values().toArray();
+    List<List<Integer>> v_c_0 = allVarsChanging(loc0);
+    List<List<Integer>> v_c_1 = allVarsChanging(loc);
+    return isChangingSameVar(v_c_0,v_c_1);
 
     }
-    else {
-      Collection<Command> loc = commands.values();
-      //compare the existing command to the new command
-    }
-
-    return true;
-  }
-
-
 
   private enum Variable {
     COLOR, DIMENSION, POSITION;
   }
 
-  private boolean isChangingSameVar(List<Variable> v1, List<Variable> v2) {
-    for (Variable var : v1) {
-      for (Variable var2: v2) {
-        if (var == var2) {
+  private boolean isChangingSameVar(List<List<Integer>> v1, List<List<Integer>> v2) {
+    int n = v1.size();
+    for (int i = 0; i< n; i++) {
+      List<Integer> current_row = v1.get(i);
+      int n_j = current_row.size();
+      for (int j = 0 ; j < n_j ; j++) {
+        if (v1.get(i).get(j) != v2.get(i).get(j)) {
           return true;
         }
       }
@@ -131,45 +116,41 @@ public abstract class ShapeImpl implements ShapeInt{
     return false;
   }
 
-  static private List<Variable> whatVarsChanging(Command c1, Command c2) {
-    List<Variable> list = new ArrayList<>();
-    if (c1.getColor() != c2.getColor()) {
-      list.add(Variable.COLOR);
-    } else if (c1.getPosition() != c2.getPosition()) {
-      list.add(Variable.POSITION);
-    } else if (c1.getDimension() != c2.getDimension()) {
-      list.add(Variable.DIMENSION);
+  static private List<List<Integer>> allVarsChanging(List<Command> loc) {
+    int n = loc.size();
+    List<List<Integer>> result = new ArrayList<List<Integer>>();
+    for (int i = 1; i < 0; i++) {
+      Command c1 = loc.get(i-1);
+      Command c2 = loc.get(i);
+      List<Integer> row = whatVarsChanging(c1,c2);
+      result.add(row);
     }
-    return list;
+    return result;
   }
 
-  @Override
-  public void addCommands(Command... commands) {
-    for (Command command : commands) {
-      addCommand(command);
-    }
+  static private List<Integer> whatVarsChanging(Command c1, Command c2) {
+    List<Integer> list = new ArrayList<>();
+
+    int c = c1.getColor() != c2.getColor() ? 1 : 0;
+    int p = c1.getPosition() != c2.getPosition() ? 1 : 0;
+    int d = c1.getDimension() != c2.getDimension() ? 1 : 0;
+
+    list.add(c);
+    list.add(p);
+    list.add(d);
+
+    return list;
+
   }
 
   public String getCommands() {
-//    Collection<List<Command>> values = commands.values();
-//    StringBuilder sb = new StringBuilder();
-//
-//    for (List<Command> value : values) {
-//      sb.append(getTickCommands(value));
-//    }
-//
-//    return sb.toString();
-    return "";
-  }
-
-  public String getTickCommands(List<Command> list) {
-    StringBuilder sb = new StringBuilder();
-
-    for (Command command : list) {
-      sb.append(command.toString() + "/n");
+    int n = commands.size();
+    String result = "";
+    for (int i = 0; i < n; i++) {
+      Command current = commands.get(i);
+      result.join("\n",current.toStringV2());
     }
-
-    return sb.toString();
+    return result;
   }
 
 }
