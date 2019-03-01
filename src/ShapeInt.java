@@ -40,7 +40,7 @@ public interface ShapeInt {
    * TODO: Remember to return with copies of commands
    * @return a list of existing Commands that a Shape has
    */
-//  public String getCommands();
+  public String getCommands();
 
   /**
    * Adds a list of commands to a Shape

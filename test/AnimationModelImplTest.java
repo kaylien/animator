@@ -17,13 +17,13 @@ public class AnimationModelImplTest {
   AnimationModel queryShapePass = new AnimationModelImpl();
   AnimationModel qeuryShapeFail = new AnimationModelImpl();
 
-  ShapeImpl r_0 = new Rectangle();
+//  ShapeImpl r_0 = new Rectangle();
 
   //queryShape
 
-  Command
+//  Command
   //addCommands
-  @Test
+//  @Test
   void addCommandsI() {
 
   }
