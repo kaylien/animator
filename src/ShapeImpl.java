@@ -183,16 +183,6 @@ public abstract class ShapeImpl implements ShapeInt{
     }
   }
 
-  public String queryCommands() {
-    int n = commands.size();
-    String result = "";
-    for (int i = 0; i < n; i++) {
-      Command current = commands.get(i);
-      result.join("\n",current.toStringV2());
-    }
-    return result;
-  }
-
   private boolean isSameTimeFrame(Command c1, Command c2) {
     int c1st = c1.getT();
     int c1et = c1.getEt();
