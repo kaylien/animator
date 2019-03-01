@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.NavigableMap;
 import java.util.Set;
+import java.util.TreeMap;
 
 public abstract class ShapeImpl implements ShapeInt{
   private int t;
@@ -13,8 +14,8 @@ public abstract class ShapeImpl implements ShapeInt{
 
   // Integer will be tick
 //  HashMap<Integer, List<Command>> commands;
-  HashMap<Integer, Command> commands;
-//  NavigableMap<Integer, Command> commands;
+//  HashMap<Integer, Command> commands;
+  TreeMap<Integer, Command> commands;
   //NavigableMap?????? It finds those closeby keys
 
   /**
@@ -32,7 +33,8 @@ public abstract class ShapeImpl implements ShapeInt{
     this.color = new Color(r, g, b);
     this.position = new Position(x, y);
     this.dimension = new Dimension(w, h);
-    commands = new HashMap<>();
+    commands = new TreeMap<>();
+//    commands = new HashMap<>();
   }
 
   // Copy constructor
@@ -43,18 +45,13 @@ public abstract class ShapeImpl implements ShapeInt{
   }
 
   private void addCommand(Command command) {
-//    int key = command.getT();
-//
-//    if (!this.validCommand(command)) {
-//      throw new IllegalArgumentException("Invalid Command");
-//    }
-//
-//    if (commands.containsKey(key)) {
-//      commands.get(key).add(command);
-//    }
-//    else {
-//      commands.put(command.getT(), new ArrayList<>());
-//    }
+    int key = command.getT();
+
+    if (!this.validCommand(command)) {
+      throw new IllegalArgumentException("Invalid Command");
+    }
+
+    commands.put(key, command);
   }
 
   /**
@@ -108,8 +105,8 @@ public abstract class ShapeImpl implements ShapeInt{
     return false;
   }
   
-  private boolean validCommand(Command command) {
-    return true;
+//  private boolean validCommand(Command command) {
+//    return true;
 
   static private List<Variable> whatVarsChanging(Command c, Command otherC) {
     List<Variable> list = new ArrayList<>();
