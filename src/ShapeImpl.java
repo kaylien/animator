@@ -6,6 +6,7 @@ import java.util.NavigableMap;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import javafx.geometry.Pos;
 
 public abstract class ShapeImpl implements ShapeInt{
   private int t;
@@ -46,6 +47,7 @@ public abstract class ShapeImpl implements ShapeInt{
     System.out.println(s.getCommands());
   }
 
+
   private void addCommand (Command c) {
     int key = c.getT();
 
@@ -57,7 +59,7 @@ public abstract class ShapeImpl implements ShapeInt{
     //fixCommands(c.getT(), c.getEt());
   }
 
-/**
+
   private void fixCommands(int startTime, int endTime) {
     NavigableMap<Integer, Command> commandList = commands.subMap(startTime,true,
       endTime, true);
@@ -66,42 +68,61 @@ public abstract class ShapeImpl implements ShapeInt{
     Command endCmd = commands.get(endTime);
     List<Variable> varsToChange = whatVarsChanging(startCmd, endCmd);
     int deltaTime = endTime - startTime;
-    int deltaKeys = commandList.lastKey() - commandList.firstKey();
 
+    for (Integer key : keys) {
+      Command cmd = commandList.get(key);
+      int keyDiff = key - commandList.higherKey(key);
+      float multiplier = keyDiff / deltaTime;
 
-    for (Variable var : varsToChange) {
-      for (Integer key : keys) {
-        int keyDiff = key - commandList.higherKey(key);
-        float multiplier = keyDiff / deltaKeys;
-
-        
+      if (varsToChange.contains(Variable.COLOR)) {
+        Float[] colorDiff = startCmd.getColor().colorDifference(endCmd.getColor());
+        Color newColor = updateToColor(colorDiff, multiplier, startTime, endTime);
+        cmd.setColor(newColor);
+        commands.put(key, cmd);
       }
 
-      for (int i = 0; i < commandList.size(); i++) {
-        if (var == Variable.COLOR) {
-          int cKey = commandList.get
-          Color c1 = startCmd.getColor();
-          Color c2 = endCmd.getColor();
-          Float[] array = c1.colorDifference(c2);
+      if (varsToChange.contains(Variable.POSITION)) {
+        Float[] positionDiff = startCmd.getPosition().positionDifference(endCmd.getPosition());
+        Position newPosition = updateToPosition(positionDiff, multiplier, startTime, endTime);
+        cmd.setPosition(newPosition);
+        commands.put(key, cmd);
+      }
 
-          Color sColor = commands.get(startTime).getColor();
-
-
-          float r = sColor.getR();
-          float g = sColor.getG();
-          float b = sColor.getB();
-
-          float changeR = deltaTime / array[0];
-          float changeG = deltaTime / array[1];
-          float changeB = deltaTime / array[2];
-
-          Color c = new Color(r + (changeR * ), g + (changeG * i), b + changeB);
-        }
+      if (varsToChange.contains(Variable.DIMENSION)) {
+        Float[] dimensionDiff = startCmd.getPosition().positionDifference(endCmd.getPosition());
+        Dimension newDimension = updateToDimension(dimensionDiff, multiplier, startTime, endTime);
+        cmd.setDimension(newDimension);
+        commands.put(key, cmd);
       }
     }
-
   }
-**/
+
+  public Color updateToColor(Float[] array, float multiplier, int startTime, int endTime) {
+
+    float changeR = multiplier * array[0];
+    float changeG = multiplier * array[1];
+    float changeB = multiplier * array[2];
+
+    return new Color(changeR, changeG, changeB);
+  }
+
+
+  public Position updateToPosition(Float[] array, float multiplier, int startTime, int endTime) {
+
+    float changeW = multiplier * array[0];
+    float changeH = multiplier * array[1];
+
+    return new Position(changeW, changeH);
+  }
+
+
+  public Dimension updateToDimension(Float[] array, float multiplier, int startTime, int endTime) {
+
+    float changeX = multiplier * array[0];
+    float changeY = multiplier * array[1];
+
+    return new Dimension(changeX, changeY);
+  }
 
   public void addCommands(Command... commands) {
     for(Command command: commands) {
