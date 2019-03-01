@@ -51,7 +51,7 @@ public abstract class ShapeImpl implements ShapeInt{
       if (!this.validCommand(command)) {
         throw new IllegalArgumentException("Invalid Command");
       } else {
-        this.mergeCommand(command);
+        this.mergeCommands(command);
       }
     }
   }
@@ -110,10 +110,22 @@ public abstract class ShapeImpl implements ShapeInt{
 
 
   /**
-   * @param loc
+   * @param c
    * @return
    */
-  private boolean validCommand(List<Command> loc) {
+  private boolean validCommand(Command c) {
+    int key = c.getT();
+    boolean isValid = true;
+
+    if (!(commands.lowerKey(key) == null)) {
+      Command priorCmd = commands.get(commands.lowerKey(key));
+      isValid = isSameTimeFrame(c, priorCmd) && is
+    }
+
+    if (!(commands.higherKey(key) == null)) {
+      Command afterCmd = commands.get(commands.higherKey(key));
+    }
+
 
     return isSameTimeFrame() && isChangingSameVar();
 
