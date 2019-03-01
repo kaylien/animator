@@ -1,14 +1,7 @@
 public class Rectangle extends ShapeImpl{
 
-  @Override public String getCommands() {
-    return null;
-  }
-
-  @Override public void addCommands(Command... commands) {
-
-  }
-
-  @Override public void deleteCommands(Command... commands) {
+  Rectangle(int x, int y, int w, int h, int r, int g, int b) {
+    super(x, y, w, h, r, g, b);
 
   }
 }

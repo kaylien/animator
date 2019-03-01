@@ -39,6 +39,12 @@ public abstract class ShapeImpl implements ShapeInt{
     this.dimension = shape.dimension;
   }
 
+  public static void main(String[] args) {
+    ShapeImpl s = new Rectangle(20, 30, 40, 10, 100, 200, 50);
+    Command c = new Command(20, 30, 40, 10, 100, 200, 100, 0, 10);
+    s.addCommands(c);
+  }
+
   private void addCommand(Command command) {
     int key = command.getT();
     List<Command> loc = splitCommand(command);
@@ -46,6 +52,12 @@ public abstract class ShapeImpl implements ShapeInt{
       throw new IllegalArgumentException("Invalid Command");
     } else {
       this.mergeCommands(loc);
+    }
+  }
+
+  public void addCommands(Command... commands) {
+    for (Command c : commands) {
+      addCommand(c);
     }
   }
 
