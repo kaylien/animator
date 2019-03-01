@@ -52,11 +52,12 @@ public abstract class ShapeImpl implements ShapeInt{
       throw new IllegalArgumentException("Invalid command");
     }
 
-    if (commands.containsKey(key)) {
+    commands.put(key, c);
+    fixCommands(c.getT(), c.getEt());
+  }
 
-    } else {
-      commands.put(key, c);
-    }
+  private void fixCommands(int startTime, int endTime) {
+    
   }
 
   public void addCommands(Command... commands) {
