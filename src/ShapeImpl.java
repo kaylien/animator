@@ -61,6 +61,15 @@ public abstract class ShapeImpl implements ShapeInt{
     }
   }
 
+  public String getCommands() {
+    StringBuilder sb = new StringBuilder();
+    Collection<Command> values = commands.values();
+    for (Command c : values) {
+      sb.append(c.toString());
+    }
+    return sb.toString();
+  }
+
   public void mergeCommands(List<Command> loc) {
     for (Command c : loc) {
       int key = c.getT();
