@@ -2,7 +2,7 @@
  * Cannot have a Color with params outside of 0 and 255
  */
 public class Color {
-  private int r, g, b;
+  private float r, g, b;
 
   Color(int r, int g, int b) {
     illegalColor(r);
@@ -15,36 +15,36 @@ public class Color {
   }
 
   // TODO: Fix? Not sure if best way to handle errors. But could do try catches later
-  public void illegalColor(int c) {
+  public void illegalColor(float c) {
     if (c < 0 || c > 255) {
       throw new IllegalArgumentException("Cannot have a color argument below 0 or above 255");
     }
   }
 
-  public int getR() {
+  public float getR() {
     return r;
   }
 
-  public void setR(int r) {
+  public void setR(float r) {
     illegalColor(r);
     this.r = r;
   }
 
-  public int getG() {
+  public float getG() {
     return g;
   }
 
-  public void setG(int g) {
+  public void setG(float g) {
     illegalColor(g);
 
     this.g = g;
   }
 
-  public int getB() {
+  public float getB() {
     return b;
   }
 
-  public void setB(int b) {
+  public void setB(float b) {
     illegalColor(b);
 
     this.b = b;

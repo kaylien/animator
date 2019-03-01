@@ -1,5 +1,5 @@
 public class Dimension {
-  int w, h;
+  float w, h;
 
   Dimension(int w, int h) {
     illegalDimension(w);
@@ -8,26 +8,26 @@ public class Dimension {
     this.h = h;
   }
 
-  public void illegalDimension(int d) {
+  public void illegalDimension(float d) {
     if (d <= 0) {
       throw new IllegalArgumentException("Must have a positive width and height");
     }
   }
 
-  public int getH() {
+  public float getH() {
     return h;
   }
 
-  public void setH(int h) {
+  public void setH(float h) {
     illegalDimension(h);
     this.h = h;
   }
 
-  public int getW() {
+  public float getW() {
     return w;
   }
 
-  public void setW(int w) {
+  public void setW(float w) {
     illegalDimension(w);
     this.w = w;
   }

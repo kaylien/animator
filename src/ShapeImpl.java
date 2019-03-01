@@ -40,6 +40,7 @@ public abstract class ShapeImpl implements ShapeInt{
 
   private void addCommand(Command command) {
     int key = command.getT();
+    int endTime = command.getEt();
 
     if (!this.validCommand(command)) {
       throw new IllegalArgumentException("Invalid Command");
@@ -48,11 +49,11 @@ public abstract class ShapeImpl implements ShapeInt{
     commands.put(key, command);
   }
 
+  private void editCommands(Command startCmd, Command endCmd) {
+
+  }
+
   /**
-   * Given a command, what is it changing?
-   * Get tick last prior to the start time of the command, pull out the command
-   * Compare that command to the given command
-   * What's changing?
    * @param command
    * @return
    */
@@ -118,13 +119,13 @@ public abstract class ShapeImpl implements ShapeInt{
   }
 
   public String getCommands() {
-//    Collection<List<Command>> values = commands.values();
+
 //    StringBuilder sb = new StringBuilder();
 //
 //    for (List<Command> value : values) {
 //      sb.append(getTickCommands(value));
 //    }
-//
+
 //    return sb.toString();
     return "";
   }
