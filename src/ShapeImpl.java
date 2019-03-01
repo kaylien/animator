@@ -119,15 +119,15 @@ public abstract class ShapeImpl implements ShapeInt{
 
     if (!(commands.lowerKey(key) == null)) {
       Command priorCmd = commands.get(commands.lowerKey(key));
-      isValid = isSameTimeFrame(c, priorCmd) && is
+
+      isValid = isSameTimeFrame(c, priorCmd) && isChangingSameVar(c, priorCmd);
     }
 
     if (!(commands.higherKey(key) == null)) {
       Command afterCmd = commands.get(commands.higherKey(key));
     }
 
-
-    return isSameTimeFrame() && isChangingSameVar();
+    return isValid;
 
   }
 
@@ -149,24 +149,13 @@ public abstract class ShapeImpl implements ShapeInt{
     return false;
   }
 
-  static private List<List<Integer>> allVarsChanging(List<Command> loc) {
-    int n = loc.size();
-    List<List<Integer>> result = new ArrayList<List<Integer>>();
-    for (int i = 1; i < 0; i++) {
-      Command c1 = loc.get(i-1);
-      Command c2 = loc.get(i);
-      List<Integer> row = whatVarsChanging(c1,c2);
-      result.add(row);
-    }
-    return result;
-  }
 
-  static private List<Integer> whatVarsChanging(Command c1, Command c2) {
-    List<Integer> list = new ArrayList<>();
+  static private List<Variable> whatVarsChanging(Command c1, Command c2) {
+    List<Variable> list = new ArrayList<>();
 
-    int c = c1.getColor() != c2.getColor() ? 1 : 0;
-    int p = c1.getPosition() != c2.getPosition() ? 1 : 0;
-    int d = c1.getDimension() != c2.getDimension() ? 1 : 0;
+    Variable c = c1.getColor() != c2.getColor() ? Variable.COLOR : null;
+    Variable p = c1.getPosition() != c2.getPosition() ? Variable.POSITION : null;
+    Variable d = c1.getDimension() != c2.getDimension() ? Variable.DIMENSION : null;
 
     list.add(c);
     list.add(p);
