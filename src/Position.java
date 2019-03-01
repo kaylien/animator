@@ -21,4 +21,9 @@ public class Position {
   public void setY(float y) {
     this.y = y;
   }
+
+  public String toStringV2() {
+    return "".join(" ",String.valueOf(x),String.valueOf(y));
+  }
+
 }

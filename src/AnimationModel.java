@@ -20,9 +20,8 @@ public interface AnimationModel {
    * Returns a list of commands for each shape.
    * @return A string representation of a list of commands
    */
-  String getCommands();
-
   String queryCommands();
+
   String queryShapes();
 
 }

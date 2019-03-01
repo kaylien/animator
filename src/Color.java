@@ -49,4 +49,8 @@ public class Color {
 
     this.b = b;
   }
+
+  public String toStringV2() {
+    return "".join(" ",String.valueOf(r),String.valueOf(g),String.valueOf(b));
+  }
 }

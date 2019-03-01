@@ -146,4 +146,14 @@ public class Command {
     this.et = et;
   }
 
+
+  public String toStringV2() {
+    return "".join(" ",
+      String.valueOf(getT()),
+      String.valueOf(getEt()),
+      getDimension().toStringV2(),
+      getPosition().toStringV2(),
+      getColor().toStringV2());
+  }
+
 }

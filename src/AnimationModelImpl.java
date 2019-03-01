@@ -11,7 +11,6 @@ import java.util.Set;
 public class AnimationModelImpl implements AnimationModel {
   List<ShapeImpl> shapeList;
 
-
   AnimationModelImpl(){
     shapeList = new ArrayList<>();
   }
@@ -27,24 +26,21 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public String getCommands() {
-    StringBuilder sb = new StringBuilder();
-
+  public String queryCommands() {
+    String result = "";
+    String heading = "t x y w h r g b";
+    String lines = "----------------";
+    result.join("\n",heading,lines);
     for (ShapeImpl shape : shapeList) {
-      sb.append(shape.getCommands());
+      result.join("\n",shape.getCommands());
     }
 
-    return sb.toString();
-  }
-
-  @Override
-  public String queryCommands() {
-    return "";
+    return result;
   }
 
   @Override
   public String queryShapes() {
+
     return "";
   }
-
 }

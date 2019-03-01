@@ -32,4 +32,8 @@ public class Dimension {
     this.w = w;
   }
 
+  public String toStringV2() {
+    return "".join(" ",String.valueOf(w),String.valueOf(h));
+  }
+
 }
