@@ -108,7 +108,6 @@ public abstract class ShapeImpl implements ShapeInt{
 
   }
 
-
   /**
    * @param c
    * @return

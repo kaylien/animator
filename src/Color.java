@@ -23,6 +23,11 @@ public class Color {
     }
   }
 
+  /**
+   * Calculates the difference in color of a Color.
+   * @param c
+   * @return
+   */
   public Float[] colorDifference(Color c) {
     Float[] list = new Float[3];
 
