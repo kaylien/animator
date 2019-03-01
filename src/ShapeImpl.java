@@ -48,11 +48,10 @@ public abstract class ShapeImpl implements ShapeInt{
   public void addCommands(Command... commands) {
     for(Command command: commands) {
       int key = command.getT();
-      List<Command> loc = splitCommand(command);
-      if (!this.validCommands(loc)) {
+      if (!this.validCommand(command)) {
         throw new IllegalArgumentException("Invalid Command");
       } else {
-        this.mergeCommands(loc);
+        this.mergeCommand(command);
       }
     }
   }
@@ -79,6 +78,7 @@ public abstract class ShapeImpl implements ShapeInt{
     }
   }
 
+  /**
   private static List<Command> splitCommand(Command command) {
     int n = command.getEt() - command.getT();
     List<Command> result = new ArrayList<Command>();
@@ -90,6 +90,7 @@ public abstract class ShapeImpl implements ShapeInt{
     //needs to be reversed before returned
     return result;
   }
+   */
 
   private static Command tickState(Command c, int n, int i) {
     int multiplier = (1-i/n);
@@ -112,15 +113,9 @@ public abstract class ShapeImpl implements ShapeInt{
    * @param loc
    * @return
    */
-  private boolean validCommands(List<Command> loc) {
-    //data structs man
-    List<Command> loc0 = new ArrayList<>();
-    for (Command c : loc) {
-      loc0.add(c);
-    }
-    List<List<Integer>> v_c_0 = allVarsChanging(loc0);
-    List<List<Integer>> v_c_1 = allVarsChanging(loc);
-    return isChangingSameVar(v_c_0,v_c_1);
+  private boolean validCommand(List<Command> loc) {
+
+    return isSameTimeFrame() && isChangingSameVar();
 
   }
 

@@ -26,7 +26,7 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public String queryCommands() {
+  public String getCommands() {
     String result = "";
     String heading = "t x y w h r g b";
     String lines = "----------------";
@@ -48,7 +48,7 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public String queryShapes() {
+  public String getShapes() {
     String result = "";
     for (ShapeInt s: shapeList) {
       result.join(" ", //s.name
