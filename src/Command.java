@@ -14,7 +14,7 @@ public class Command {
   private Position position;
   private Dimension dimension;
 
-//  //TODO: Errors handled in Object classes now
+//  TODO: Errors handled in Object classes now
 //  enum Error {
 //    LESS_THAN_0(0, "Cannot create a command with an argument less than 0."),
 //    ILLEGAL_COLOR(1, "Color inputs must be between 0 and 255.");
@@ -72,7 +72,6 @@ public class Command {
   }
 
   //TODO: Make error commands
-
 
   /**
    * TODO: Copy constructor comment

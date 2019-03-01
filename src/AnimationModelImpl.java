@@ -6,6 +6,7 @@ import java.util.Set;
 
 /**
  * Created by echung326 on 2/23/19.
+ * TODO: DOCUMENT EVERYTHING
  */
 public class AnimationModelImpl implements AnimationModel {
   List<ShapeImpl> shapeList;
