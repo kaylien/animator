@@ -84,8 +84,9 @@ public abstract class ShapeImpl implements ShapeInt{
     //index???
     int t = c.getEt() - i;
     return new Command(x,y,w,h,r,g,b,t,c.getEt());
-    commands.put(key, command);
-    editCommands(commands.get(key), commands.get(endTime));
+
+    //commands.put(key, command);
+    //editCommands(commands.get(key), commands.get(endTime));
   }
 
   private void editCommands(Command startCmd, Command endCmd) {
@@ -233,7 +234,7 @@ public abstract class ShapeImpl implements ShapeInt{
 
   }
 
-  public String getCommands() {
+  public String queryCommands() {
     int n = commands.size();
     String result = "";
     for (int i = 0; i < n; i++) {

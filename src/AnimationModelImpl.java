@@ -40,7 +40,12 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public String queryShapes() {
-
-    return "";
+    String result = "";
+    for (ShapeInt s: shapeList) {
+      result.join(" ", //s.name
+        "");
+    }
+    return result;
   }
+
 }

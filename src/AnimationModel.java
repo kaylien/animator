@@ -22,6 +22,9 @@ public interface AnimationModel {
    */
   String queryCommands();
 
+  /**
+   * Returns the list of Shapes in the animation
+   * @return A string representation of a list of shapes
+   */
   String queryShapes();
-
 }
