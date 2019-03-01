@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * Cannot have a Color with params outside of 0 and 255
  */
@@ -19,6 +21,16 @@ public class Color {
     if (c < 0 || c > 255) {
       throw new IllegalArgumentException("Cannot have a color argument below 0 or above 255");
     }
+  }
+
+  public Float[] colorDifference(Color c) {
+    Float[] list = new Float[3];
+
+    list[0] = this.r - c.getR();
+    list[1] = this.g - c.getG();
+    list[2] = this.b - c.getB();
+
+    return list;
   }
 
   public float getR() {

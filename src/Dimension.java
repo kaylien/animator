@@ -8,6 +8,15 @@ public class Dimension {
     this.h = h;
   }
 
+  public Float[] dimensionDifference(Dimension d) {
+    Float[] list = new Float[2];
+
+    list[0] = this.h - d.getH();
+    list[1] = this.w - d.getW();
+
+    return list;
+  }
+
   public void illegalDimension(float d) {
     if (d <= 0) {
       throw new IllegalArgumentException("Must have a positive width and height");

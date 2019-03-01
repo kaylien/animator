@@ -50,7 +50,11 @@ public abstract class ShapeImpl implements ShapeInt{
   }
 
   private void editCommands(Command startCmd, Command endCmd) {
+    List<Variable> vars = whatVarsChanging(startCmd,endCmd);
 
+    if (vars.contains(Variable.COLOR)) {
+      startCmd.getColor().getR();
+    }
   }
 
   /**

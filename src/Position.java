@@ -6,6 +6,15 @@ public class Position {
     this.y = y;
   }
 
+  public Float[] positionDifference(Position p) {
+    Float[] list = new Float[2];
+
+    list[0] = this.x - p.getX();
+    list[1] = this.y - p.getY();
+
+    return list;
+  }
+
   public float getX() {
     return x;
   }
