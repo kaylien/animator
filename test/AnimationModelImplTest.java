@@ -1,4 +1,5 @@
 import javafx.animation.Animation;
+import javafx.scene.shape.Shape;
 import org.junit.Test;
 import org.junit.Assert.*;
 
@@ -15,14 +16,15 @@ public class AnimationModelImplTest {
   AnimationModel queryCommandPass = new AnimationModelImpl();
   AnimationModel queryCommandFail = new AnimationModelImpl();
   AnimationModel queryShapePass = new AnimationModelImpl();
-  AnimationModel qeuryShapeFail = new AnimationModelImpl();
+  AnimationModel queryShapeFail = new AnimationModelImpl();
 
   //queryShape
 
-  //addCommands
+  //addCommand
 
+  @Test
   void addCommandsI() {
-
+    assertEquals();
   }
   //addShape
 
