@@ -17,7 +17,10 @@ public class AnimationModelImplTest {
   AnimationModel queryShapePass = new AnimationModelImpl();
   AnimationModel qeuryShapeFail = new AnimationModelImpl();
 
-  //queryShape
+  @Test
+  public void testAddCommands() {
+
+  }
 
   //addCommands
 

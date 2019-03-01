@@ -42,21 +42,18 @@ public abstract class ShapeImpl implements ShapeInt{
     ShapeImpl s = new Rectangle(20, 30, 40, 10, 100, 200, 50);
     Command c = new Command(20, 30, 40, 10, 100, 200, 100, 1, 10);
     s.addCommands(c);
-  }
-
-  private void addCommand(Command command) {
-    int key = command.getT();
-    List<Command> loc = splitCommand(command);
-    if (!this.validCommands(loc)) {
-      throw new IllegalArgumentException("Invalid Command");
-    } else {
-      this.mergeCommands(loc);
-    }
+    System.out.println(s.getCommands());
   }
 
   public void addCommands(Command... commands) {
-    for (Command c : commands) {
-      addCommand(c);
+    for(Command command: commands) {
+      int key = command.getT();
+      List<Command> loc = splitCommand(command);
+      if (!this.validCommands(loc)) {
+        throw new IllegalArgumentException("Invalid Command");
+      } else {
+        this.mergeCommands(loc);
+      }
     }
   }
 
@@ -64,7 +61,7 @@ public abstract class ShapeImpl implements ShapeInt{
     StringBuilder sb = new StringBuilder();
     Collection<Command> values = commands.values();
     for (Command c : values) {
-      sb.append(c.toString());
+      sb.append(c.toStringV2());
     }
     return sb.toString();
   }
@@ -74,8 +71,10 @@ public abstract class ShapeImpl implements ShapeInt{
       int key = c.getT();
       if (this.commands.containsKey(key)) {
         this.commands.replace(key,c);
+        System.out.println(commands.get(key).toStringV2());
       } else {
         this.commands.put(key,c);
+        System.out.println(commands.get(key).toStringV2());
       }
     }
   }
@@ -86,6 +85,7 @@ public abstract class ShapeImpl implements ShapeInt{
     for (int i = 0; i < n ; i++) {
       Command current_state = tickState(command,n,i);
       result.add(current_state);
+      System.out.println(current_state.toString());
     }
     //needs to be reversed before returned
     return result;
