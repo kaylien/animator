@@ -28,7 +28,7 @@ public abstract class ShapeImpl implements ShapeInt{
     this.color = new Color(r, g, b);
     this.position = new Position(x, y);
     this.dimension = new Dimension(w, h);
-    commands = new TreeMap<Integer, Command>();
+    commands = new TreeMap<>();
   }
 
   // Copy constructor
