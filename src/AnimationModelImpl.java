@@ -11,6 +11,7 @@ import java.util.Set;
 public class AnimationModelImpl implements AnimationModel {
   List<ShapeImpl> shapeList;
 
+
   AnimationModelImpl(){
     shapeList = new ArrayList<>();
   }
@@ -49,12 +50,12 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public String getShapes() {
-    String result = "";
+    StringBuilder result = new StringBuilder();
     for (ShapeInt s: shapeList) {
-      result.join(" ", //s.name
-        "");
+      result.append(s.toStringV2());
+      result.append("\n");
     }
-    return result;
+    return result.toString();
   }
 
 }
