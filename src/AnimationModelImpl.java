@@ -41,8 +41,8 @@ public class AnimationModelImpl implements AnimationModel {
   private List<ShapeInt> copyShapeList() {
     List<ShapeImpl> result = new ArrayList<>();
     for(ShapeInt s: shapeList) {
-      ShapeImpl copy = new ShapeImpl(s);
-      result.add(copy);
+//      ShapeImpl copy = new ShapeImpl(s);
+//      result.add(copy);
     }
     return copyShapeList();
   }

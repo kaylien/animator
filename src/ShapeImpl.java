@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.NavigableMap;
 import java.util.Set;
 import java.util.TreeMap;
-import javafx.geometry.Pos;
 
 public abstract class ShapeImpl implements ShapeInt{
   private int t;
@@ -41,7 +40,7 @@ public abstract class ShapeImpl implements ShapeInt{
 
   public static void main(String[] args) {
     ShapeImpl s = new Rectangle(20, 30, 40, 10, 100, 200, 50);
-    Command c = new Command(20, 30, 40, 10, 100, 200, 100, 0, 10);
+    Command c = new Command(20, 30, 40, 10, 100, 200, 100, 1, 10);
     s.addCommands(c);
   }
 
@@ -172,12 +171,12 @@ public abstract class ShapeImpl implements ShapeInt{
 
   }
 
-  public void deleteCommands(Command... command) {
-    int n = command.length;
-    for (int i; i< 0; i++) {
-
-    }
-  }
+//  public void deleteCommands(Command... command) {
+//    int n = command.length;
+//    for (int i; i< 0; i++) {
+//
+//    }
+//  }
 
   public String queryCommands() {
     int n = commands.size();
