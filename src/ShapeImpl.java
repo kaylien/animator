@@ -45,7 +45,7 @@ public abstract class ShapeImpl implements ShapeInt{
     System.out.println(s.getCommands());
   }
 
-  private void addCommand(Command c) {
+  private void addCommands (Command c) {
     int key = c.getT();
 
     if (!(validCommand(c))) {
@@ -59,6 +59,7 @@ public abstract class ShapeImpl implements ShapeInt{
     }
   }
 
+  /**
   public void addCommands(Command... commands) {
     for(Command command: commands) {
       int key = command.getT();
@@ -69,6 +70,7 @@ public abstract class ShapeImpl implements ShapeInt{
       }
     }
   }
+  */
 
   public String getCommands() {
     StringBuilder sb = new StringBuilder();
