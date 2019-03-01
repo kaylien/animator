@@ -44,19 +44,15 @@ public abstract class ShapeImpl implements ShapeInt{
     s.addCommands(c);
   }
 
-  private void addCommand(Command command) {
-    int key = command.getT();
-    List<Command> loc = splitCommand(command);
-    if (!this.validCommands(loc)) {
-      throw new IllegalArgumentException("Invalid Command");
-    } else {
-      this.mergeCommands(loc);
-    }
-  }
-
   public void addCommands(Command... commands) {
-    for (Command c : commands) {
-      addCommand(c);
+    for(Command command: commands) {
+      int key = command.getT();
+      List<Command> loc = splitCommand(command);
+      if (!this.validCommands(loc)) {
+        throw new IllegalArgumentException("Invalid Command");
+      } else {
+        this.mergeCommands(loc);
+      }
     }
   }
 
