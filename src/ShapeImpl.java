@@ -186,4 +186,8 @@ public abstract class ShapeImpl implements ShapeInt{
     return result;
   }
 
+  private boolean isSameTimeFrame(Command c1, Command c2) {
+    return true;
+  }
+
 }

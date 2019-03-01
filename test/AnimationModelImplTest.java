@@ -25,10 +25,10 @@ public class AnimationModelImplTest {
 
   //addCommand
 
-  @Test
-  void addCommandsI() {
-    assertEquals();
-  }
+//  @Test
+//  void addCommandsI() {
+//    assertEquals();
+//  }
   //addShape
 
   //queryCommand
