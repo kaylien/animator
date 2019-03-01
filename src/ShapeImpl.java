@@ -137,50 +137,6 @@ public abstract class ShapeImpl implements ShapeInt{
     return sb.toString();
   }
 
-  public void mergeCommands(List<Command> loc) {
-    for (Command c : loc) {
-      int key = c.getT();
-      if (this.commands.containsKey(key)) {
-        this.commands.replace(key,c);
-        System.out.println(commands.get(key).toStringV2());
-      } else {
-        this.commands.put(key,c);
-        System.out.println(commands.get(key).toStringV2());
-      }
-    }
-  }
-
-  /**
-  private static List<Command> splitCommand(Command command) {
-    int n = command.getEt() - command.getT();
-    List<Command> result = new ArrayList<Command>();
-    for (int i = 0; i < n ; i++) {
-      Command current_state = tickState(command,n,i);
-      result.add(current_state);
-      System.out.println(current_state.toString());
-    }
-    //needs to be reversed before returned
-    return result;
-  }
-   */
-
-  private static Command tickState(Command c, int n, int i) {
-    int multiplier = (1-i/n);
-    int r = Math.round(c.getColor().getR() * multiplier);
-    int g = Math.round(c.getColor().getG() * multiplier);
-    int b = Math.round(c.getColor().getB() * multiplier);
-    int w = Math.round(c.getDimension().getW() * multiplier);
-    int h = Math.round(c.getDimension().getH() * multiplier);
-    //making a linear movement for x and y???
-    int x = Math.round(c.getPosition().getX() * multiplier);
-    int y = Math.round(c.getPosition().getY() * multiplier);
-    //index???
-    int t = c.getEt() - i;
-    return new Command(x,y,w,h,r,g,b,t,c.getEt());
-
-  }
-
-
   private enum Variable {
     COLOR, DIMENSION, POSITION;
   }
