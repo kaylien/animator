@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.NavigableMap;
 import java.util.Set;
+import java.util.SortedMap;
 import java.util.TreeMap;
 
 public abstract class ShapeImpl implements ShapeInt{
@@ -52,25 +53,61 @@ public abstract class ShapeImpl implements ShapeInt{
       throw new IllegalArgumentException("Invalid command");
     }
 
-    if (commands.containsKey(key)) {
-
-    } else {
-      commands.put(key, c);
-    }
+    commands.put(key, c);
+    fixCommands(c.getT(), c.getEt());
   }
 
-  /**
-  public void addCommands(Command... commands) {
-    for(Command command: commands) {
-      int key = command.getT();
-      if (!this.validCommand(command)) {
-        throw new IllegalArgumentException("Invalid Command");
-      } else {
-        this.mergeCommands(command);
+  private void fixCommands(int startTime, int endTime) {
+    NavigableMap<Integer, Command> commandList = commands.subMap(startTime,true,
+      endTime, true);
+    Set<Integer> keys = commandList.keySet();
+    Command startCmd = commands.get(startTime);
+    Command endCmd = commands.get(endTime);
+    List<Variable> varsToChange = whatVarsChanging(startCmd, endCmd);
+    int deltaTime = endTime - startTime;
+    int deltaKeys = commandList.lastKey() - commandList.firstKey();
+
+
+    for (Variable var : varsToChange) {
+      for (Integer key : keys) {
+        int keyDiff = key - commandList.higherKey(key);
+        float multiplier = keyDiff / deltaKeys;
+
+        
+      }
+
+      for (int i = 0; i < commandList.size(); i++) {
+        if (var == Variable.COLOR) {
+          int cKey = commandList.get
+          Color c1 = startCmd.getColor();
+          Color c2 = endCmd.getColor();
+          Float[] array = c1.colorDifference(c2);
+
+          Color sColor = commands.get(startTime).getColor();
+
+
+          float r = sColor.getR();
+          float g = sColor.getG();
+          float b = sColor.getB();
+
+          float changeR = deltaTime / array[0];
+          float changeG = deltaTime / array[1];
+          float changeB = deltaTime / array[2];
+
+          Color c = new Color(r + (changeR * ), g + (changeG * i), b + changeB);
+        }
       }
     }
+
   }
-  */
+
+
+  public void addCommands(Command... commands) {
+    for(Command command: commands) {
+      addCommand(command);
+    }
+  }
+  
 
   public String getCommands() {
     StringBuilder sb = new StringBuilder();
