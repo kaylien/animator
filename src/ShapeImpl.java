@@ -43,11 +43,11 @@ public abstract class ShapeImpl implements ShapeInt{
     int key = command.getT();
     List<Command> loc = splitCommand(command);
     if (!this.validCommands(loc)) {
-        throw new IllegalArgumentException("Invalid Command");
-      } else {
-        this.mergeCommands(loc);
-      }
+      throw new IllegalArgumentException("Invalid Command");
+    } else {
+      this.mergeCommands(loc);
     }
+  }
 
   public void mergeCommands(List<Command> loc) {
     for (Command c : loc) {
@@ -89,92 +89,6 @@ public abstract class ShapeImpl implements ShapeInt{
     //editCommands(commands.get(key), commands.get(endTime));
   }
 
-  private void editCommands(Command startCmd, Command endCmd) {
-    List<Variable> vars = whatVarsChanging(startCmd, endCmd);
-    int startTime = startCmd.getT();
-    int endTime = endCmd.getT();
-
-    if (vars.contains(Variable.COLOR)) {
-      Color c1 = startCmd.getColor();
-      Color c2 = endCmd.getColor();
-      Float[] colorDiff = c1.colorDifference(c2);
-      updateColor(colorDiff, startTime, endTime);
-    }
-
-    if (vars.contains(Variable.DIMENSION)) {
-      Dimension d1 = startCmd.getDimension();
-      Dimension d2 = endCmd.getDimension();
-
-      Float[] dimensionDiff = d1.dimensionDifference(d2);
-      updateDimension(dimensionDiff, startTime, endTime);
-    }
-
-    if (vars.contains(Variable.POSITION)) {
-      Position p1 = startCmd.getPosition();
-      Position p2 = endCmd.getPosition();
-
-      Float[] positionDiff = p1.positionDifference(p2);
-      updatePosition(positionDiff, startTime, endTime);
-    }
-  }
-
-  // TODO: the next three methods should be abstracted, I just haven't done it yet
-  private void updateColor(Float[] array, int startTime, int endTime) {
-    int deltaTime = endTime - startTime;
-    Color sColor = commands.get(startTime).getColor();
-    float r = sColor.getR();
-    float g = sColor.getG();
-    float b = sColor.getB();
-
-    float changeR = deltaTime / array[0];
-    float changeG = deltaTime / array[1];
-    float changeB = deltaTime / array[2];
-
-
-    for (int i = 0; i < deltaTime; i ++) {
-      Color c = new Color(r + (changeR * i), g + (changeG * i), b + changeB);
-      int key = startTime + i;
-      Command currentCmd = commands.get(key);
-      currentCmd.setColor(c);
-      commands.put(key, currentCmd);
-    }
-  }
-
-  private void updateDimension(Float[] array, int startTime, int endTime) {
-    int deltaTime = endTime - startTime;
-    Dimension sDim = commands.get(startTime).getDimension();
-    float h = sDim.getH();
-    float w = sDim.getW();
-
-    float changeH = deltaTime / array[0];
-    float changeW = deltaTime / array[1];
-
-    for (int i = 0; i < deltaTime; i ++) {
-      Dimension d = new Dimension(w + (changeW * i), h + (changeH * i));
-      int key = startTime + i;
-      Command currentCmd = commands.get(key);
-      currentCmd.setDimension(d);
-      commands.put(key, currentCmd);
-    }
-  }
-
-  private void updatePosition(Float[] array, int startTime, int endTime) {
-    int deltaTime = endTime - startTime;
-    Position sPos = commands.get(startTime).getPosition();
-    float x = sPos.getX();
-    float y = sPos.getY();
-
-    float changeX = deltaTime / array[0];
-    float changeY = deltaTime / array[1];
-
-    for (int i = 0; i < deltaTime; i ++) {
-      Position p = new Position(x + (changeX * i), y + (changeY * i));
-      int key = startTime + i;
-      Command currentCmd = commands.get(key);
-      currentCmd.setPosition(p);
-      commands.put(key, currentCmd);
-    }
-  }
 
   /**
    * @param loc
@@ -182,12 +96,15 @@ public abstract class ShapeImpl implements ShapeInt{
    */
   private boolean validCommands(List<Command> loc) {
     //data structs man
-    List<Command> loc0 = commands.values().toArray();
+    List<Command> loc0 = new ArrayList<>();
+    for (Command c : loc) {
+      loc0.add(c);
+    }
     List<List<Integer>> v_c_0 = allVarsChanging(loc0);
     List<List<Integer>> v_c_1 = allVarsChanging(loc);
     return isChangingSameVar(v_c_0,v_c_1);
 
-    }
+  }
 
   private enum Variable {
     COLOR, DIMENSION, POSITION;
