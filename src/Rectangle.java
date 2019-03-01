@@ -4,8 +4,4 @@ public class Rectangle extends ShapeImpl{
     super(x, y, w, h, r, g, b);
 
   }
-
-  @Override public void addCommands(Command... commands) {
-
-  }
 }

@@ -46,6 +46,7 @@ public class AnimationModelImpl implements AnimationModel {
     }
     return copyShapeList();
   }
+
   @Override
   public String queryShapes() {
     String result = "";
