@@ -165,7 +165,7 @@ public abstract class ShapeImpl implements ShapeInt{
 
   public void deleteCommands(Command... command) {
     int n = command.length;
-    for (int i; i< 0; i++) {
+    for (int i = 0; i< 0; i++) {
 
     }
   }
