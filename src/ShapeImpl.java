@@ -45,6 +45,20 @@ public abstract class ShapeImpl implements ShapeInt{
     System.out.println(s.getCommands());
   }
 
+  private void addCommand(Command c) {
+    int key = c.getT();
+
+    if (!(validCommand(c))) {
+      throw new IllegalArgumentException("Invalid command");
+    }
+
+    if (commands.containsKey(key)) {
+
+    } else {
+      commands.put(key, c);
+    }
+  }
+
   public void addCommands(Command... commands) {
     for(Command command: commands) {
       int key = command.getT();
