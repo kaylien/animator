@@ -126,6 +126,7 @@ public abstract class ShapeImpl implements ShapeInt{
       addCommand(command);
     }
   }
+  
 
   public String getCommands() {
     StringBuilder sb = new StringBuilder();
