@@ -60,9 +60,9 @@ public abstract class ShapeImpl implements ShapeInt{
   private boolean validCommand(Command command) {
     Collection<Command> listOfCommands = commands.values();
 //    Collection<Command> locII = splitCommand(Command);
-    for (Command c : locII) {
-
-    }
+//    for (Command c : locII) {
+//
+//    }
 
     int key = command.getT();
     if (commands.get(command.getT()) == null) {
