@@ -39,6 +39,10 @@ public class AnimationModelImpl implements AnimationModel {
     return sb.toString();
   }
 
+  /**
+   * Copies the current list of shapes.
+   * @return A copy of the list of shapes.
+   */
   private List<ShapeInt> copyShapeList() {
     List<ShapeImpl> result = new ArrayList<>();
     for(ShapeInt s: shapeList) {
@@ -48,12 +52,16 @@ public class AnimationModelImpl implements AnimationModel {
     return copyShapeList();
   }
 
+  /**
+   * Returns the current list of Shapes.
+   * @return Currently outputs the current list of Shapes.
+   */
   @Override
   public String getShapes() {
     StringBuilder result = new StringBuilder();
     for (ShapeInt s: shapeList) {
-      result.append(s.toStringV2());
-      result.append("\n");
+      //result.append(s.toStringV2());
+      //result.append("\n");
     }
     return result.toString();
   }
