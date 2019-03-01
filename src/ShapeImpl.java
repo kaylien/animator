@@ -1,21 +1,12 @@
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.NavigableMap;
-import java.util.Set;
+import java.util.*;
 
 public abstract class ShapeImpl implements ShapeInt{
   private int t;
   private Color color;
   private Position position;
   private Dimension dimension;
+  private TreeMap<Integer, Command> commands;
 
-  // Integer will be tick
-//  HashMap<Integer, List<Command>> commands;
-  HashMap<Integer, Command> commands;
-//  NavigableMap<Integer, Command> commands;
-  //NavigableMap?????? It finds those closeby keys
 
   /**
    *
@@ -32,7 +23,7 @@ public abstract class ShapeImpl implements ShapeInt{
     this.color = new Color(r, g, b);
     this.position = new Position(x, y);
     this.dimension = new Dimension(w, h);
-    commands = new HashMap<>();
+    commands = new TreeMap<Integer, Command>();
   }
 
   // Copy constructor
@@ -43,18 +34,18 @@ public abstract class ShapeImpl implements ShapeInt{
   }
 
   private void addCommand(Command command) {
-//    int key = command.getT();
-//
-//    if (!this.validCommand(command)) {
-//      throw new IllegalArgumentException("Invalid Command");
-//    }
-//
-//    if (commands.containsKey(key)) {
-//      commands.get(key).add(command);
-//    }
-//    else {
-//      commands.put(command.getT(), new ArrayList<>());
-//    }
+    int key = command.getT();
+
+    if (!this.validCommand(command)) {
+      throw new IllegalArgumentException("Invalid Command");
+    }
+
+    if (commands.containsKey(key)) {
+      commands.get(key).add(command);
+    }
+    else {
+      commands.put(command.getT(),command);
+    }
   }
 
   /**
@@ -67,30 +58,28 @@ public abstract class ShapeImpl implements ShapeInt{
    */
 
   private boolean validCommand(Command command) {
-//    Collection<List<Command>> listOfCommands = commands.values();
-//    for (List<Command> list : listOfCommands) {
-//      for (Command c : list) {
-//
-//      }
-//    }
-//
-//    int key = command.getT();
-//    if (commands.get(command.getT()) == null) {
-//      //get the command right before and right after to the new command
-//      int lastKey = commands.lowerKey(command.getT());
-//      int nextKey = commands.higherKey(command.getT());
-//      Command lastCommand = commands.get(lastKey);
-//      Command nextCommand = commands.get(nextKey);
-//
-//      List<Variable>
-//    }
-//    else {
-//      Collection<Command> listOfCommands = commands.values();
-//      //compare the existing command to the new command
-//    }
-//
+    Collection<Command> listOfCommands = commands.values();
+    Collection<Command> locII = splitCommand(Command);
+    for (Command c : locII) {
+      
+    }
+    int key = command.getT();
+    if (commands.get(command.getT()) == null) {
+      //get the command right before and right after to the new command
+      int lastKey = commands.lowerKey(command.getT());
+      int nextKey = commands.higherKey(command.getT());
+      Command lastCommand = commands.get(lastKey);
+      Command nextCommand = commands.get(nextKey);
+
+    }
+    else {
+      Collection<Command> listOfCommands = commands.values();
+      //compare the existing command to the new command
+    }
+
     return true;
   }
+
 
 
   private enum Variable {
@@ -107,11 +96,11 @@ public abstract class ShapeImpl implements ShapeInt{
     }
     return false;
   }
-  
+
   private boolean validCommand(Command command) {
     return true;
 
-  static private List<Variable> whatVarsChanging(Command c, Command otherC) {
+  static private List<Variable> whatVarsChanging(Collection<Command> c, Collection<Command> otherC) {
     List<Variable> list = new ArrayList<>();
     if (c.getColor() != otherC.getColor()) {
       list.add(Variable.COLOR);
