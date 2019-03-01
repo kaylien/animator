@@ -57,17 +57,12 @@ public abstract class ShapeImpl implements ShapeInt{
   }
 
   private void fixCommands(int startTime, int endTime) {
-    
+
   }
 
   public void addCommands(Command... commands) {
     for(Command command: commands) {
-      int key = command.getT();
-      if (!this.validCommand(command)) {
-        throw new IllegalArgumentException("Invalid Command");
-      } else {
-        this.mergeCommands(command);
-      }
+      addCommand(command);
     }
   }
 
