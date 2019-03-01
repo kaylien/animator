@@ -105,8 +105,6 @@ public abstract class ShapeImpl implements ShapeInt{
     int t = c.getEt() - i;
     return new Command(x,y,w,h,r,g,b,t,c.getEt());
 
-    //commands.put(key, command);
-    //editCommands(commands.get(key), commands.get(endTime));
   }
 
 
