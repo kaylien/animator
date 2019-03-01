@@ -47,7 +47,8 @@ public abstract class ShapeImpl implements ShapeInt{
     System.out.println(s.getCommands());
   }
 
-  private void addCommand(Command c) {
+
+  private void addCommand (Command c) {
     int key = c.getT();
 
     if (!(validCommand(c))) {
@@ -55,8 +56,9 @@ public abstract class ShapeImpl implements ShapeInt{
     }
 
     commands.put(key, c);
-    fixCommands(c.getT(), c.getEt());
+    //fixCommands(c.getT(), c.getEt());
   }
+
 
   private void fixCommands(int startTime, int endTime) {
     NavigableMap<Integer, Command> commandList = commands.subMap(startTime,true,
@@ -113,6 +115,7 @@ public abstract class ShapeImpl implements ShapeInt{
     return new Position(changeW, changeH);
   }
 
+
   public Dimension updateToDimension(Float[] array, float multiplier, int startTime, int endTime) {
 
     float changeX = multiplier * array[0];
@@ -152,12 +155,11 @@ public abstract class ShapeImpl implements ShapeInt{
       Command command = commands.get(key);
       Command nextCmd = commands.get(key + 1);
       List<Variable> v1 = whatVarsChanging(command, nextCmd);
-
+      
       if (isSameTimeFrame(command, c) && isChangingSameVar(v1, v2)) {
         return true;
       }
     }
-
     return false;
   }
 
@@ -168,20 +170,18 @@ public abstract class ShapeImpl implements ShapeInt{
       v1.contains(Variable.DIMENSION) && v2.contains(Variable.DIMENSION);
   }
 
-
   static private List<Variable> whatVarsChanging(Command c1, Command c2) {
     List<Variable> list = new ArrayList<>();
-
-    Variable c = c1.getColor() != c2.getColor() ? Variable.COLOR : null;
-    Variable p = c1.getPosition() != c2.getPosition() ? Variable.POSITION : null;
-    Variable d = c1.getDimension() != c2.getDimension() ? Variable.DIMENSION : null;
-
-    list.add(c);
-    list.add(p);
-    list.add(d);
-
+    if(c1.getColor() == c2.getColor()) {
+      list.add(Variable.COLOR);
+    }
+    if(c1.getPosition() == c2.getPosition()) {
+      list.add(Variable.POSITION);
+    }
+    if(c1.getDimension() == c2.getDimension()) {
+      list.add(Variable.DIMENSION);
+    }
     return list;
-
   }
 
   /**
