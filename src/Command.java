@@ -114,6 +114,8 @@ public class Command {
     this.color = new Color(r, g, b);
   }
 
+  public void setColor(Color color) { this.color = color; }
+
   public Dimension getDimension() {
     return dimension;
   }
@@ -128,6 +130,10 @@ public class Command {
 
   public void setPosition(int x, int y) {
     this.position = new Position(x, y);
+  }
+
+  public void setPosition(Position position) {
+    this.position = position;
   }
 
   public int getT() {

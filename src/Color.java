@@ -6,7 +6,7 @@ import java.util.List;
 public class Color {
   private float r, g, b;
 
-  Color(int r, int g, int b) {
+  Color(float r, float g, float b) {
     illegalColor(r);
     illegalColor(g);
     illegalColor(b);

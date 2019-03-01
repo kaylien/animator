@@ -1,7 +1,7 @@
 public class Position {
   private float x, y;
 
-  Position(int x, int y) {
+  Position(float x, float y) {
     this.x = x;
     this.y = y;
   }

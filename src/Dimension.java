@@ -1,7 +1,7 @@
 public class Dimension {
   float w, h;
 
-  Dimension(int w, int h) {
+  Dimension(float w, float h) {
     illegalDimension(w);
     illegalDimension(h);
     this.w = w;
