@@ -35,7 +35,6 @@ public class AnimationModelImpl implements AnimationModel {
     for (ShapeImpl shape : shapeList) {
       sb.append(shape.getCommands());
     }
-
     return sb.toString();
   }
 
