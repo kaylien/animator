@@ -56,7 +56,7 @@ public abstract class ShapeImpl implements ShapeInt{
     }
 
     commands.put(key, c);
-    //fixCommands(c.getT(), c.getEt());
+    fixCommands(c.getT(), c.getEt());
   }
 
 
@@ -149,6 +149,11 @@ public abstract class ShapeImpl implements ShapeInt{
    * @return
    */
   private boolean validCommand(Command c) {
+    Command endCmd = commands.get(c.getEt());
+    if (endCmd == null) {
+      return true;
+    }
+
     List<Variable> v2 = whatVarsChanging(c, commands.get(c.getEt()));
 
     for (int key = 0; key < commands.size() - 1; key++) {
