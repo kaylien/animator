@@ -27,15 +27,16 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public String getCommands() {
-    String result = "";
-    String heading = "t x y w h r g b";
-    String lines = "----------------";
-    result.join("\n",heading,lines);
+    StringBuilder sb = new StringBuilder();
+    String heading = "t x y w h r g b\n";
+    String lines = "----------------\n";
+    sb.append(heading);
+    sb.append(lines);
     for (ShapeImpl shape : shapeList) {
-      result.join("\n",shape.getCommands());
+      sb.append(shape.getCommands());
     }
 
-    return result;
+    return sb.toString();
   }
 
   private List<ShapeInt> copyShapeList() {
