@@ -60,8 +60,8 @@ public class AnimationModelImpl implements AnimationModel {
   public String getShapes() {
     StringBuilder result = new StringBuilder();
     for (ShapeInt s: shapeList) {
-      //result.append(s.toStringV2());
-      //result.append("\n");
+      result.append(s.toString());
+      result.append("\n");
     }
     return result.toString();
   }

@@ -1,12 +1,9 @@
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.NavigableMap;
 import java.util.Set;
-import java.util.SortedMap;
 import java.util.TreeMap;
-import javafx.geometry.Pos;
 
 public abstract class ShapeImpl implements ShapeInt{
   private int t;
@@ -14,7 +11,6 @@ public abstract class ShapeImpl implements ShapeInt{
   private Position position;
   private Dimension dimension;
   private TreeMap<Integer, Command> commands;
-
   /**
    *
    * @param x
@@ -53,15 +49,12 @@ public abstract class ShapeImpl implements ShapeInt{
   private void addCommand (Command c) {
     int key = c.getT();
     int endKey = c.getEt();
-
-//    if (!(validCommand(c))) {
-//      throw new IllegalArgumentException("Invalid command");
-//    }
-
+    if (!(validCommand(c))) {
+      throw new IllegalArgumentException("Invalid command");
+    }
     commands.put(endKey, c);
     fixCommands(key, endKey);
   }
-
 
   private void fixCommands(int startTime, int endTime) {
     NavigableMap<Integer, Command> commandList = commands.subMap(startTime,true,
@@ -156,6 +149,7 @@ public abstract class ShapeImpl implements ShapeInt{
    * @return
    */
   private boolean validCommand(Command c) {
+    //getting the endstate
     Command endCmd = commands.get(c.getEt());
     if (endCmd == null) {
       return true;
@@ -174,7 +168,6 @@ public abstract class ShapeImpl implements ShapeInt{
     }
     return false;
   }
-
 
   private boolean isChangingSameVar(List<Variable> v1, List<Variable> v2) {
     return v1.contains(Variable.COLOR) && v2.contains(Variable.COLOR) ||

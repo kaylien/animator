@@ -31,8 +31,10 @@ public class AnimationModelImplTest {
   Command c3 = new Command(0,20,10,10,0,0,0,0,5);
   Command c4 = new Command(0,10,10,10,0,0,0,5,10);
   Command c5 = new Command(0,25,10,10,0,0,0,5,10);
+  Command c6 = new Command(0,15,10,10,0,0,0,1,9);
 
   public void initializeTestEnvironment() {
+
     AnimationModel base = new AnimationModelImpl();
     AnimationModel addCommandPass = new AnimationModelImpl();
     AnimationModel addCommandFail = new AnimationModelImpl();
@@ -57,8 +59,11 @@ public class AnimationModelImplTest {
     Command c2 = new Command(0,5,10,10,0,0,0,5,15);
     Command c3 = new Command(0,20,10,10,0,0,0,0,5);
     Command c4 = new Command(0,10,10,10,0,0,0,5,10);
-    Command c5 = new Command(0,25,10,10,0,0,0,5,10);
+    Command c5 = new Command(0,25,10,10,0,0,0,6,10);
+    Command c6 = new Command(0,15,10,10,0,0,0,1,9);
+
   }
+
   @Test (expected = IllegalArgumentException.class)
   public void testAddCommandsEdgeCaseI() {
     initializeTestEnvironment();
@@ -87,17 +92,76 @@ public class AnimationModelImplTest {
     assertEquals("",base.getCommands());
   }
 
+  @Test (expected = IllegalArgumentException.class)
+  public void testAddCommandsEdgeCaseIV() {
+    initializeTestEnvironment();
+    base.addShape(r_1);
+    base.addCommands(r_1,c4);
+    base.addCommands(r_1,c5);
+    assertEquals("",base.getCommands());
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testAddCommandsEdgeCaseV() {
+    initializeTestEnvironment();
+    base.addShape(r_1);
+    base.addCommands(r_1,c1);
+    base.addCommands(r_1,c6);
+    assertEquals("",base.getCommands());
+  }
+
+  @Test
+  public void testAddCommandsPass() {
+    initializeTestEnvironment();
+    base.addShape(r_1);
+    base.addCommands(r_1,c3);
+    base.addCommands(r_1,c4);
+    assertEquals("",base.getCommands());
+  }
+
   //addCommand
 
-//  @Test
-//  void addCommandsI() {
-//    assertEquals();
-//  }
   //addShape
+  @Test (expected = NullPointerException.class)
+  public void testAddShapeI() {
+    initializeTestEnvironment();
+    base.addShape(r_1);
+    base.addShape(null);
+    assertEquals("",base.getCommands());
+  }
 
-  //queryCommand
+  @Test (expected = NullPointerException.class)
+  public void testAddShapeII() {
+    initializeTestEnvironment();
+    base.addShape(r_1);
+    base.addShape(null);
+    assertEquals("",base.getCommands());
+  }
 
-  //queryShape
+  @Test (expected = NullPointerException.class)
+  public void testAddShapeIII() {
+    initializeTestEnvironment();
+    base.addShape(r_1);
+    base.addShape(r_4);
+    assertEquals("",base.getCommands());
+  }
 
+  //getCommand
+
+  @Test (expected = NullPointerException.class)
+  public void testAddShapeIV() {
+    initializeTestEnvironment();
+    base.addShape(r_1);
+    base.addShape(r_3);
+    assertEquals("",base.getCommands());
+  }
+
+  @Test
+  public void testAddShapeV() {
+    initializeTestEnvironment();
+    base.addShape(r_1);
+    base.addShape(r_2);
+    assertEquals("",base.getShapes());
+  }
 
 }
