@@ -1,12 +1,16 @@
+/**
+ * Class representing a position in a x,y coordinate plane.
+ */
 public class Position {
-  private float x, y;
+  private float x;
+  private float y;
 
   Position(float x, float y) {
     this.x = x;
     this.y = y;
   }
 
-  public Float[] positionDifference(Position p) {
+  protected Float[] positionDifference(Position p) {
     Float[] list = new Float[2];
 
     list[0] = this.x - p.getX();
@@ -15,29 +19,41 @@ public class Position {
     return list;
   }
 
-  public float getX() {
+  protected float getX() {
     return x;
   }
 
-  public void setX(float x) {
+  protected void setX(float x) {
     this.x = x;
   }
 
-  public float getY() {
+  protected float getY() {
     return y;
   }
 
-  public void setY(float y) {
+  protected void setY(float y) {
     this.y = y;
   }
 
-  public boolean equals(Position p) {
-    return p.getX() == getX() && p.getY() == getY();
+  @Override public int hashCode() {
+    return this.hashCode();
+  }
+
+  @Override public boolean equals(Object obj) {
+
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null || getClass() != obj.getClass()) {
+      return false;
+    }
+
+    Position p = (Position) obj;
+    return p.getX() == this.getX() && p.getY() == this.getY();
   }
 
   public String toStringV2() {
-    return String.format("%-4s %-4s", String.valueOf(Math.round(x)),String.valueOf(Math.round(y)));
-//    return "".join("   ",);
+    return String.format("%-4s %-4s", String.valueOf(Math.round(x)), String.valueOf(Math.round(y)));
   }
 
 }

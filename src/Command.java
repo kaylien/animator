@@ -1,67 +1,31 @@
-import java.util.Set;
-
 /**
- * TODO: Class comment
- * TODO: Create all class invariants & enforce them
- * Invariants:
- * - No negative arguments
- * - Color values between 0 and 255 (ENFORCED by using the Color class)
- * - Dimension allows negative values, have to check for that
+ * Represents a Command to be conducted during an animation.
  */
+
 public class Command {
-  private int t, et;
+  private int t;
+  private int et;
   private Color color;
   private Position position;
   private Dimension dimension;
 
-//  TODO: Errors handled in Object classes now
-//  enum Error {
-//    LESS_THAN_0(0, "Cannot create a command with an argument less than 0."),
-//    ILLEGAL_COLOR(1, "Color inputs must be between 0 and 255.");
-//
-//    private final int code;
-//    private final String description;
-//
-//    private Error(int code, String description) {
-//      this.code = code;
-//      this.description = description;
-//    }
-//
-//    public String getDescription() {
-//      return description;
-//    }
-//
-//    public int getCode() {
-//      return code;
-//    }
-//
-//    @Override
-//    public String toString() {
-//      return code + ": " + description;
-//    }
-//
-//  }
-
   /**
-   * TODO: Constructor comments
-   *
    * Describes the motions of shape R, between two moments of animation: t == tick,
    * (x,y) == position, (w,h) == dimensions, (r,g,b) == color (with values between 0 and 255).
-   *
-   * @param x position x
-   * @param y position y
-   * @param w width
-   * @param h height
-   * @param r red
-   * @param g green
-   * @param b blue
-   * @param t tick
+   * @param x  position x
+   * @param y  position y
+   * @param w  width
+   * @param h  height
+   * @param r  red
+   * @param g  green
+   * @param b  blue
+   * @param t  tick
    * @param et end tick
    */
-  public Command(int x, int y, int w, int h, int r, int g, int b, int t, int et) {
+  protected Command(int x, int y, int w, int h, int r, int g, int b, int t, int et) {
     if (et < 0 || t < 0 || x < 0 || y < 0) {
-      throw new IllegalArgumentException("Cannot create a command with start or end time" +
-        " less than 0.");
+      throw new IllegalArgumentException(
+        "Cannot create a command with start or end time" + " less than 0.");
     }
 
     this.color = new Color(r, g, b);
@@ -71,13 +35,11 @@ public class Command {
     this.et = et;
   }
 
-  //TODO: Make error commands
-
   /**
-   * TODO: Copy constructor comment
-   * @param command
+   * Copy Constructor for commmands.
+   * @param command the command to be copied.
    */
-  public Command(Command command) {
+  protected Command(Command command) {
     this.color = command.getColor();
     this.position = command.getPosition();
     this.dimension = command.getDimension();
@@ -86,13 +48,11 @@ public class Command {
   }
 
   // Hashing by making the start time the key
-  @Override
-  public int hashCode() {
+  @Override public int hashCode() {
     return getT();
   }
 
-  @Override
-  public boolean equals(Object obj) {
+  @Override public boolean equals(Object obj) {
 
     if (this == obj) {
       return true;
@@ -102,64 +62,62 @@ public class Command {
     }
 
     Command cmd = (Command) obj;
-    return color == cmd.getColor() && dimension == cmd.getDimension()
-      && position == cmd.getPosition() && t == cmd.getT();
+    return color == cmd.getColor() && dimension == cmd.getDimension() && position == cmd
+      .getPosition() && t == cmd.getT();
   }
 
-  public Color getColor() {
+  protected Color getColor() {
     return color;
   }
 
-  public void setColor(int r, int g, int b) {
+  protected void setColor(Color color) {
+    this.color = color;
+  }
+
+  protected void setColor(int r, int g, int b) {
     this.color = new Color(r, g, b);
   }
 
-  public void setColor(Color color) { this.color = color; }
-
-  public Dimension getDimension() {
+  protected Dimension getDimension() {
     return dimension;
   }
 
-  public void setDimension(Dimension dimension) {
+  protected void setDimension(Dimension dimension) {
     this.dimension = dimension;
   }
 
-  public Position getPosition() {
+  protected Position getPosition() {
     return position;
   }
 
-  public void setPosition(int x, int y) {
-    this.position = new Position(x, y);
-  }
-
-  public void setPosition(Position position) {
+  protected void setPosition(Position position) {
     this.position = position;
   }
 
-  public int getT() {
+  protected void setPosition(int x, int y) {
+    this.position = new Position(x, y);
+  }
+
+  protected int getT() {
     return t;
   }
 
-  public void setT(int t) {
+  protected void setT(int t) {
     this.t = t;
   }
 
-  public int getEt() {
+  protected int getEt() {
     return et;
   }
 
-  public void setEt(int et) {
+  protected void setEt(int et) {
     this.et = et;
   }
 
 
-  public String toStringV2() {
-
-//    String.format("%-4s%-4s%-4s%-4s%-4s%-4s%-4s%-4s", )
-    return "".join(" ",
-      getPosition().toStringV2(),
-      getColor().toStringV2(),
-      getDimension().toStringV2());
+  protected String toStringV2() {
+    return ""
+      .join(" ", getPosition().toStringV2(), getColor().toStringV2(), getDimension().toStringV2());
   }
 
 }

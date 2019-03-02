@@ -1,8 +1,5 @@
-import java.awt.Shape;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * An Implementation of an Animation that handles Shapes.
@@ -10,36 +7,28 @@ import java.util.Set;
 public class AnimationModelImpl implements AnimationModel {
 
   List<ShapeImpl> shapeList;
-  AnimationModelImpl(){
+
+  AnimationModelImpl() {
     shapeList = new ArrayList<>();
   }
 
-  @Override
-  public void addCommands(ShapeImpl shape, Command... commands) {
-//    shape.addCommands(commands);
+  @Override public void addCommands(ShapeImpl shape, Command... commands) {
+    shape.addCommands(commands);
   }
 
-  @Override
-  public void addShape(ShapeImpl shape) {
-    if(shape == null) {
+  @Override public void addShape(ShapeImpl shape) {
+    if (shape == null) {
       throw new IllegalArgumentException("Shape is null");
     }
     shapeList.add(shape);
   }
 
-  @Override
-  public String getCommands() {
+  @Override public String getCommands() {
     StringBuilder sb = new StringBuilder();
-    String heading = String.format("%-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s",
-      "t", "x", "y", "w", "h", "r", "g", "b");
-    String lines = "-------------------------------------      " +
-      " -------------------------------------\n";
-//    for (ShapeImpl shape : shapeList) {
-//      sb.append(shape.toString());
-//      sb.append("\n");
-//      sb.append(heading);
-//      sb.append(shape.getCommands());
-//    }
+    String heading = String
+        .format("%-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s", "t", "x", "y", "w", "h", "r", "g", "b");
+    String lines =
+        "-------------------------------------      " + " -------------------------------------\n";
 
     for (ShapeImpl shape : shapeList) {
       sb.append("shape ");
@@ -57,32 +46,17 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   /**
-   * Copies the current list of shapes.
-   * @return A copy of the list of shapes.
-   */
-  private List<ShapeInt> copyShapeList() {
-    List<ShapeImpl> result = new ArrayList<>();
-    for(ShapeInt s: shapeList) {
-//      ShapeImpl copy = new ShapeImpl(s);
-//      result.add(copy);
-    }
-    return copyShapeList();
-  }
-
-  /**
    * Returns the current list of Shapes.
+   *
    * @return Currently outputs the current list of Shapes.
    */
-  @Override
-  public String getShapes() {
+  @Override public String getShapes() {
     StringBuilder result = new StringBuilder();
-    for (ShapeInt s: shapeList) {
+    for (ShapeInt s : shapeList) {
       result.append(s.toString());
       result.append("\n");
     }
     return result.toString();
   }
-
-
 
 }
