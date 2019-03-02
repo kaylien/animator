@@ -17,7 +17,7 @@ public class AnimationModelImpl implements AnimationModel {
   @Override
   public void addCommands(ShapeImpl shape, Command... commands) {
 
-    shape.addCommands(commands);
+//    shape.addCommands(commands);
   }
 
   @Override

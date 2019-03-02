@@ -8,8 +8,8 @@ public class Main {
     Command c= new Command(20,30,40,10,100,200,50,1,1);
     Command c1= new Command(20,30,40,10,100,200,12,1,1);
     Command c2= new Command(20,30,40,10,100,200,50,1,1);
-    s.addCommands(c);
-    System.out.println(s.getCommands());
-    s.addCommands(c1);
+//    s.addCommands(c);
+//    System.out.println(s.getCommands());
+//    s.addCommands(c1);
   }
 }

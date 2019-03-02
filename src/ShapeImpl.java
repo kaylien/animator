@@ -11,6 +11,7 @@ public abstract class ShapeImpl implements ShapeInt{
   private Position position;
   private Dimension dimension;
   private TreeMap<Integer, Command> commands;
+  private int appears, disappears;
 
   /**
    *
@@ -50,33 +51,43 @@ public abstract class ShapeImpl implements ShapeInt{
   public static void main(String[] args) {
     ShapeImpl s = new Rectangle(200, 200, 50, 100, 255, 0,  0, 5,
     80);
-//    Command c = new Command(20, 30, 40, 10, 100, 200, 100, 1, 10);
+    Command c = new Command(20, 30, 40, 10, 100, 200, 100, 1, 10);
 //    s.addCommands(c);
+    System.out.println(s.validCommand(c));
+    s.addCommand(c);
     System.out.println(s.getCommands());
+
+
   }
 
   /**
    * Puts in command with a key at the start and end time.
    * @param c
    */
-  private void addCommand (Command c, Variable v) {
+   void addCommand (Command c) {
     if (c == null) {
       throw new IllegalArgumentException("Command is null");
     }
 
     int key = c.getT();
     int endKey = c.getEt();
+    Command startCommand;
 
     if (!(validCommand(c))) {
       throw new IllegalArgumentException("Invalid command");
     }
 
-//    if (commands.isEmpty()) {
-//      commands.put(key, new Command(position.getX(), position.getY(), dimension.getW(),
-//        dimension.getH(), color.getR(), color.getG(), color.getB(), key, endKey));
-//    }
+    //TODO: Abstract this as a command?
+    try {
+      startCommand = new Command(commands.floorEntry(key).getValue());
+    } catch (NullPointerException e) {
+      startCommand = new Command(commands.firstEntry().getValue());
+    }
+    startCommand.setT(key);
+    startCommand.setEt(endKey);
 
     commands.put(endKey, c);
+    commands.put(key, startCommand);
 //    fixCommands(key, endKey);
   }
 
@@ -168,10 +179,20 @@ public abstract class ShapeImpl implements ShapeInt{
   public String getCommands() {
     StringBuilder sb = new StringBuilder();
     Collection<Command> values = commands.values();
-    for (Command c : values) {
-      sb.append(c.toStringV2());
+    Set<Integer> keys = commands.keySet();
+    for (Integer key : keys) {
+      sb.append(key);
+      sb.append("\n");
+      sb.append(commands.get(key).toStringV2());
       sb.append("\n");
     }
+
+    //TODO: Edit this, just testing rn
+//    for (Command c : values) {
+//      sb.append(c.toStringV2());
+//      sb.append("\n");
+//    }
+
     return sb.toString();
   }
 
@@ -191,14 +212,21 @@ public abstract class ShapeImpl implements ShapeInt{
    * @param c
    * @return
    */
-  private boolean validCommand(Command c) {
+   boolean validCommand(Command c) {
     int cKey = c.getT();
     Command startCommand1;
     Collection<Command> commandList = commands.values();
 
     // Trying to find the variables changing between the existing state of the shape at the start
     // time, and comparing it to the given command
-    startCommand1 = commands.floorEntry(cKey).getValue();
+     // If the floor entry doesn't exist, it's bc this new command is outside of the given range
+     //upon creation of the shape. However, we'll just use the first entry as the comparator
+    try {
+      startCommand1 = commands.floorEntry(cKey).getValue();
+    } catch (NullPointerException e) {
+      startCommand1 = commands.firstEntry().getValue();
+    }
+
     List<Variable> v2 = whatVarsChanging(startCommand1, c);
 
     for (Command command : commandList) {
@@ -250,13 +278,6 @@ public abstract class ShapeImpl implements ShapeInt{
 
     return (c1et >= c2st && c1st <= c2st) || (c1st >= c2st && c1st <= c2et) ||
       (c1st >= c2st && c1et < c2et) || (c1st <= c2st && c1et >= c2et);
-
-    //this commented out return statement always returns true
-//    return
-//      (c1st >= c2st && c1et <= c2et)  //
-//        || (c1st >= c2st && c1et >= c2et)
-//        || (c1st <= c2st && c1et >= c2et)
-//        || (c1st <= c2st && c1et <= c2et);
   }
 
   static private List<Variable> whatVarsChanging(Command c1, Command c2) {
