@@ -41,6 +41,10 @@ public class Dimension {
     this.w = w;
   }
 
+  public boolean equals(Dimension d) {
+    return d.getW() == getW() && d.getH() == getH();
+  }
+
   public String toStringV2() {
     return "".join(" ",String.valueOf(w),String.valueOf(h));
   }

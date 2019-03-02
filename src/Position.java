@@ -31,6 +31,10 @@ public class Position {
     this.y = y;
   }
 
+  public boolean equals(Position p) {
+    return p.getX() == getX() && p.getY() == getY();
+  }
+
   public String toStringV2() {
     return "".join(" ",String.valueOf(x),String.valueOf(y));
   }

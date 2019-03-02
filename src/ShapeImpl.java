@@ -49,9 +49,9 @@ public abstract class ShapeImpl implements ShapeInt{
   }
 
   public static void main(String[] args) {
-    ShapeImpl s = new Rectangle(200, 200, 50, 100, 255, 0,  0, 5,
-    80);
-    Command c = new Command(20, 30, 40, 10, 100, 200, 100, 1, 10);
+    ShapeImpl s = new Rectangle(0, 200, 50, 100, 255, 0,  0, 50,
+    70);
+    Command c = new Command(255, 200, 50, 100, 255, 0, 0, 50, 80);
 //    s.addCommands(c);
     System.out.println(s.validCommand(c));
     s.addCommand(c);
@@ -88,7 +88,7 @@ public abstract class ShapeImpl implements ShapeInt{
 
     commands.put(endKey, c);
     commands.put(key, startCommand);
-//    fixCommands(key, endKey);
+    fixCommands(key, endKey);
   }
 
   /**
@@ -105,40 +105,52 @@ public abstract class ShapeImpl implements ShapeInt{
   private void fixCommands(int startTime, int endTime) {
     NavigableMap<Integer, Command> commandList = commands.subMap(startTime,true,
       endTime, true);
-    Set<Integer> keys = commandList.keySet();
+
     Command startCmd = commands.get(startTime);
     Command endCmd = commands.get(endTime);
     List<Variable> varsToChange = whatVarsChanging(startCmd, endCmd);
-    int deltaTime = endTime - startTime;
 
-    for (Integer key : keys) {
-      Command cmd = commandList.get(key);
-      if (commandList.higherKey(key) == null) {
-        return;
-      }
-      int keyDiff = key - commandList.higherKey(key);
-      float multiplier = keyDiff / deltaTime;
+    System.out.println(startCmd.toStringV2() + "\n" + endCmd.toStringV2());
+    System.out.println(startTime + " " + endTime);
+    System.out.println(varsToChange);
+
+    int deltaTime = endTime - startTime;
+    Integer key = commandList.firstKey();
+    Color newColor;
+    Position newPosition;
+    Dimension newDimension;
+
+    while (!(commandList.higherKey(key) == null)) {
+      Command cmd = new Command(commandList.get(key));
+      int nextKey = commandList.higherKey(key);
+//      System.out.println(nextKey + " key: " + key + " deltatime: " + deltaTime);
+      float deltaKey = nextKey - key;
+//      System.out.println(deltaKey);
+      float multiplier = deltaKey / deltaTime;
+      System.out.println(multiplier);
 
       if (varsToChange.contains(Variable.COLOR)) {
         Float[] colorDiff = startCmd.getColor().colorDifference(endCmd.getColor());
-        Color newColor = updateToColor(colorDiff, multiplier);
+        newColor = updateToColor(colorDiff, multiplier);
         cmd.setColor(newColor);
-        commands.put(key, cmd);
       }
 
       if (varsToChange.contains(Variable.POSITION)) {
         Float[] positionDiff = startCmd.getPosition().positionDifference(endCmd.getPosition());
-        Position newPosition = updateToPosition(positionDiff, multiplier);
-        cmd.setPosition(newPosition);
-        commands.put(key, cmd);
+        System.out.println(positionDiff[0] + " " + positionDiff[1] + " Multiplier: " + multiplier);
+//        newPosition = updateToPosition(positionDiff, multiplier,
+//          commandList.floorEntry(key).getValue().getPosition());
+//        cmd.setPosition(newPosition);
       }
 
       if (varsToChange.contains(Variable.DIMENSION)) {
         Float[] dimensionDiff = startCmd.getPosition().positionDifference(endCmd.getPosition());
-        Dimension newDimension = updateToDimension(dimensionDiff, multiplier);
+        newDimension = updateToDimension(dimensionDiff, multiplier);
         cmd.setDimension(newDimension);
-        commands.put(key, cmd);
       }
+
+      commands.put(key, cmd);
+      key = nextKey;
     }
   }
 
@@ -152,21 +164,24 @@ public abstract class ShapeImpl implements ShapeInt{
   }
 
 
-  public Position updateToPosition(Float[] array, float multiplier) {
+  public Position updateToPosition(Float[] array, float multiplier, Position nextKey) {
 
-    float changeW = multiplier * array[0];
-    float changeH = multiplier * array[1];
+    float changeX = (multiplier * array[0]) + nextKey.getX();
+    float changeY = multiplier * array[1 ]+ nextKey.getY();
 
-    return new Position(changeW, changeH);
+    System.out.println(changeX + " " + changeY);
+
+    return new Position(changeX, changeY);
   }
 
 
   public Dimension updateToDimension(Float[] array, float multiplier) {
 
-    float changeX = multiplier * array[0];
-    float changeY = multiplier * array[1];
+    float changeW = multiplier * array[0];
+    float changeH = multiplier * array[1];
+    System.out.println(changeW + " " + changeH);
 
-    return new Dimension(changeX, changeY);
+    return new Dimension(changeW, changeH);
   }
 
 //  public void addCommands(Command... commands) {

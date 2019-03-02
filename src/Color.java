@@ -69,6 +69,10 @@ public class Color {
     this.b = b;
   }
 
+  public boolean equals(Color c) {
+    return c.getR() == getR() && c.getG() == getG() && c.getB() == getB();
+  }
+
   public String toStringV2() {
     return "".join(" ",String.valueOf(r),String.valueOf(g),String.valueOf(b));
   }
