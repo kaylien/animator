@@ -8,15 +8,14 @@ import java.util.Set;
  * An Implementation of an Animation that handles Shapes.
  */
 public class AnimationModelImpl implements AnimationModel {
-  List<ShapeImpl> shapeList;
 
+  List<ShapeImpl> shapeList;
   AnimationModelImpl(){
     shapeList = new ArrayList<>();
   }
 
   @Override
   public void addCommands(ShapeImpl shape, Command... commands) {
-
 //    shape.addCommands(commands);
   }
 
