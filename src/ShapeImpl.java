@@ -25,14 +25,16 @@ public abstract class ShapeImpl implements ShapeInt{
    * @param g
    * @param b
    */
-  ShapeImpl(int x, int y, int w, int h, int r, int g, int b) {
+  ShapeImpl(int x, int y, int w, int h, int r, int g, int b, int appears, int disappears) {
 
     this.color = new Color(r, g, b);
     this.position = new Position(x, y);
     this.dimension = new Dimension(w, h);
     commands = new TreeMap<>();
-    Command cmd = new Command(x, y, w, h, r, g, b, 0, 0);
-    commands.put(0, cmd);
+    // Going to add a new shape to the model, and it automatically creates an initialize command
+    // then you can pick a shape to continue to add commands to
+    Command cmd = new Command(x, y, w, h, r, g, b, appears, 0);
+    commands.put(appears, cmd);
   }
 
   // Copy constructor
@@ -43,23 +45,32 @@ public abstract class ShapeImpl implements ShapeInt{
   }
 
   public static void main(String[] args) {
-    ShapeImpl s = new Rectangle(20, 30, 40, 10, 100, 200, 50);
-    Command c = new Command(20, 30, 40, 10, 100, 200, 100, 1, 10);
-    s.addCommands(c);
+    ShapeImpl s = new Rectangle(200, 200, 50, 100, 255, 0,  0, 5);
+//    Command c = new Command(20, 30, 40, 10, 100, 200, 100, 1, 10);
+//    s.addCommands(c);
     System.out.println(s.getCommands());
   }
 
-
+  /**
+   * Puts in command with a key at the start and end time.
+   * @param c
+   */
   private void addCommand (Command c) {
     int key = c.getT();
     int endKey = c.getEt();
 
-//    if (!(validCommand(c))) {
-//      throw new IllegalArgumentException("Invalid command");
+    if (!(validCommand(c))) {
+      throw new IllegalArgumentException("Invalid command");
+    }
+
+//    if (commands.isEmpty()) {
+//      commands.put(key, new Command(position.getX(), position.getY(), dimension.getW(),
+//        dimension.getH(), color.getR(), color.getG(), color.getB(), key, endKey));
 //    }
 
+
     commands.put(endKey, c);
-    fixCommands(key, endKey);
+//    fixCommands(key, endKey);
   }
 
 
@@ -82,28 +93,28 @@ public abstract class ShapeImpl implements ShapeInt{
 
       if (varsToChange.contains(Variable.COLOR)) {
         Float[] colorDiff = startCmd.getColor().colorDifference(endCmd.getColor());
-        Color newColor = updateToColor(colorDiff, multiplier, startTime, endTime);
+        Color newColor = updateToColor(colorDiff, multiplier);
         cmd.setColor(newColor);
         commands.put(key, cmd);
       }
 
       if (varsToChange.contains(Variable.POSITION)) {
         Float[] positionDiff = startCmd.getPosition().positionDifference(endCmd.getPosition());
-        Position newPosition = updateToPosition(positionDiff, multiplier, startTime, endTime);
+        Position newPosition = updateToPosition(positionDiff, multiplier);
         cmd.setPosition(newPosition);
         commands.put(key, cmd);
       }
 
       if (varsToChange.contains(Variable.DIMENSION)) {
         Float[] dimensionDiff = startCmd.getPosition().positionDifference(endCmd.getPosition());
-        Dimension newDimension = updateToDimension(dimensionDiff, multiplier, startTime, endTime);
+        Dimension newDimension = updateToDimension(dimensionDiff, multiplier);
         cmd.setDimension(newDimension);
         commands.put(key, cmd);
       }
     }
   }
 
-  public Color updateToColor(Float[] array, float multiplier, int startTime, int endTime) {
+  public Color updateToColor(Float[] array, float multiplier) {
 
     float changeR = multiplier * array[0];
     float changeG = multiplier * array[1];
@@ -113,7 +124,7 @@ public abstract class ShapeImpl implements ShapeInt{
   }
 
 
-  public Position updateToPosition(Float[] array, float multiplier, int startTime, int endTime) {
+  public Position updateToPosition(Float[] array, float multiplier) {
 
     float changeW = multiplier * array[0];
     float changeH = multiplier * array[1];
@@ -122,7 +133,7 @@ public abstract class ShapeImpl implements ShapeInt{
   }
 
 
-  public Dimension updateToDimension(Float[] array, float multiplier, int startTime, int endTime) {
+  public Dimension updateToDimension(Float[] array, float multiplier) {
 
     float changeX = multiplier * array[0];
     float changeY = multiplier * array[1];
@@ -152,6 +163,12 @@ public abstract class ShapeImpl implements ShapeInt{
   }
 
   /**
+   * A command is only invalid if there is an existing command that is changing the same variable
+   * in the same time frame.
+   *
+   * It's iterating through the existing list of commands, to check if the ones with an overlapping
+   * time frame are changing the same variables. Each command stores an end time, so what's
+   * determining the changing variables are comparing that start command to its end command.
    * @param c
    * @return
    */
