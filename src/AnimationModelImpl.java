@@ -30,10 +30,11 @@ public class AnimationModelImpl implements AnimationModel {
     StringBuilder sb = new StringBuilder();
     String heading = "t x y w h r g b\n";
     String lines = "----------------\n";
-    sb.append(heading);
-    sb.append(lines);
     for (ShapeImpl shape : shapeList) {
       sb.append(shape.toString());
+      sb.append("\n");
+      sb.append(heading);
+      sb.append(lines);
       sb.append(shape.getCommands());
     }
     return sb.toString();

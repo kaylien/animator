@@ -51,11 +51,13 @@ public abstract class ShapeImpl implements ShapeInt{
   private void addCommand (Command c) {
     int key = c.getT();
     int endKey = c.getEt();
+    /**
     if (!(validCommand(c))) {
       throw new IllegalArgumentException("Invalid command");
     }
+     */
     commands.put(endKey, c);
-    fixCommands(key, endKey);
+    //fixCommands(key, endKey);
   }
 
   private void fixCommands(int startTime, int endTime) {
@@ -209,6 +211,5 @@ public abstract class ShapeImpl implements ShapeInt{
     return (c1et > c2st && c1st < c2st) || (c1st > c2st && c1st < c2et) ||
       (c1st > c2st && c1et < c2et) || (c1st < c2st && c1et > c2et);
   }
-
 
 }

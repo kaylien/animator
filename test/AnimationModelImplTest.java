@@ -8,7 +8,6 @@ import static junit.framework.TestCase.assertEquals;
 public class AnimationModelImplTest {
 
   AnimationModel base = new AnimationModelImpl();
-  AnimationModel addCommandPass = new AnimationModelImpl();
 
   ShapeImpl r_1 = new Rectangle(0, 0, 10, 10, 0, 0, 0);
   ShapeImpl r_2 = new Rectangle(20, 30, 40, 10, 100, 200, 55);
@@ -60,7 +59,7 @@ public class AnimationModelImplTest {
 
   }
 
-  //Constructor Tests
+  //Constructor Tests.
   @Test(expected = IllegalArgumentException.class) public void negativeRectangleX() {
     ShapeImpl r_1 = new Rectangle(-10, 0, 10, 10, 0, 0, 0);
   }
@@ -89,7 +88,7 @@ public class AnimationModelImplTest {
     ShapeImpl r_1 = new Rectangle(10, 0, 10, 10, 10, 10, -10);
   }
 
-  //Ellipse Constructor Tests
+  //Ellipse Constructor Tests.
   @Test(expected = IllegalArgumentException.class) public void negativeEllipseX() {
     ShapeImpl e_1 = new Ellipse(-10, 0, 10, 10, 0, 0, 0);
   }
@@ -118,74 +117,7 @@ public class AnimationModelImplTest {
     ShapeImpl r_1 = new Ellipse(10, 0, 10, 10, 10, 10, -10);
   }
 
-  //addCommand tests
-  @Test(expected = IllegalArgumentException.class) public void testAddCommandsEdgeCaseI() {
-    initializeTestEnvironment();
-    base.addShape(r_1);
-    base.addCommands(r_1, c1);
-    base.addCommands(r_1, c2);
-    assertEquals("", base.getCommands());
-  }
-
-  @Test(expected = IllegalArgumentException.class) public void testAddCommandsEdgeCaseII() {
-    initializeTestEnvironment();
-    base.addShape(r_1);
-    base.addCommands(r_1, c2);
-    base.addCommands(r_1, c1);
-    assertEquals("", base.getCommands());
-  }
-
-  @Test(expected = IllegalArgumentException.class) public void testAddCommandsEdgeCaseIII() {
-    initializeTestEnvironment();
-    base.addShape(r_1);
-    base.addCommands(r_1, c1);
-    base.addCommands(r_1, c3);
-    base.addCommands(r_1, c5);
-    assertEquals("", base.getCommands());
-  }
-
-  @Test(expected = IllegalArgumentException.class) public void testAddCommandsEdgeCaseIV() {
-    initializeTestEnvironment();
-    base.addShape(r_1);
-    base.addCommands(r_1, c4);
-    base.addCommands(r_1, c5);
-    assertEquals("", base.getCommands());
-  }
-
-  @Test(expected = IllegalArgumentException.class) public void testAddCommandsEdgeCaseV() {
-    initializeTestEnvironment();
-    base.addShape(r_1);
-    base.addCommands(r_1, c1);
-    base.addCommands(r_1, c6);
-    assertEquals("", base.getCommands());
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void testAddCommandsConflictingVariableChange() {
-    initializeTestEnvironment();
-    base.addShape(r_1);
-    base.addCommands(r_1, c6);
-    base.addCommands(r_1, c1);
-    assertEquals("", base.getCommands());
-  }
-
-  @Test public void testAddCommandsPassNonConflictingPeriods() {
-    initializeTestEnvironment();
-    base.addShape(r_1);
-    base.addCommands(r_1, c3);
-    base.addCommands(r_1, c4);
-    assertEquals("", base.getCommands());
-  }
-
-  @Test public void testAddCommandsPassVariedVariableChanges() {
-    initializeTestEnvironment();
-    base.addShape(r_1);
-    base.addCommands(r_1, c1);
-    base.addCommands(r_1, c7);
-    assertEquals("", base.getCommands());
-  }
-
-  //Command Constructor Tests
+  //Command Constructor Tests.
   @Test(expected = IllegalArgumentException.class) public void negativeCommandX() {
     Command c_1 = new Command(-10, 0, 10, 10, 0, 0, 0, 5, 10);
   }
@@ -222,33 +154,110 @@ public class AnimationModelImplTest {
     Command c_1 = new Command(10, 0, 10, 10, 10, 10, 10, 5, -10);
   }
 
-  //add shape tests
-  @Test(expected = NullPointerException.class) public void testAddShapeII() {
-    initializeTestEnvironment();
+  //addCommand tests.
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddCommandsOverlappingPeriodConflictI () {
+    initializeTestEnvironment ();
     base.addShape(r_1);
-    base.addShape(null);
+    base.addCommands(r_1, c1);
+    base.addCommands(r_1, c2);
     assertEquals("", base.getCommands());
   }
 
-  @Test public void testAddShapeIII() {
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddCommandsOverlappingPeriodConflictII() {
+    initializeTestEnvironment ();
+    base.addShape(r_1);
+    base.addCommands(r_1, c2);
+    base.addCommands(r_1, c1);
+    assertEquals("", base.getCommands());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddCommandsInternalPeriodConflict () {
+    initializeTestEnvironment ();
+    base.addShape(r_1);
+    base.addCommands(r_1, c1);
+    base.addCommands(r_1, c3);
+    base.addCommands(r_1, c5);
+    assertEquals("", base.getCommands());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddCommandsIdenticalPeriodConflict () {
+    initializeTestEnvironment ();
+    base.addShape(r_1);
+    base.addCommands(r_1, c4);
+    base.addCommands(r_1, c5);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddCommandsVariableConflictI() {
+    initializeTestEnvironment ();
+    base.addShape(r_1);
+    base.addCommands(r_1, c1);
+    base.addCommands(r_1, c6);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddCommandsVariableConflictII() {
+    initializeTestEnvironment ();
+    base.addShape(r_1);
+    base.addCommands(r_1, c6);
+    base.addCommands(r_1, c1);
+  }
+
+  @Test public void testAddCommandsPassNonConflictingPeriods () {
+    initializeTestEnvironment ();
+    base.addShape(r_1);
+    base.addCommands(r_1, c3);
+    base.addCommands(r_1, c4);
+    assertEquals("", base.getCommands());
+  }
+
+  @Test public void testAddCommandsPassVariedVariableChanges () {
+    initializeTestEnvironment ();
+    base.addShape(r_1);
+    base.addCommands(r_1, c1);
+    base.addCommands(r_1, c7);
+    assertEquals("", base.getCommands());
+  }
+
+  //add shape tests.
+  @Test public void testEmptyShapeList() {
+    initializeTestEnvironment();
+    assertEquals("", base.getShapes());
+  }
+
+  @Test(expected = NullPointerException.class)
+  public void testNullShape() {
+    initializeTestEnvironment();
+    base.addShape(r_1);
+    base.addShape(null);
+  }
+
+  @Test public void testAddShapesTwoRectangles () {
     initializeTestEnvironment();
     base.addShape(r_1);
     base.addShape(r_4);
     assertEquals("Rectangle\nRectangle\n", base.getShapes());
   }
 
-  @Test public void testAddShapeIV() {
+  @Test public void testAddShapesRectangleEllipse () {
     initializeTestEnvironment();
     base.addShape(r_1);
-    base.addShape(r_3);
-    assertEquals("Rectangle\n" + "Rectangle\n", base.getShapes());
+    base.addShape(e_2);
+    assertEquals("Rectangle\nEllipse\n", base.getShapes());
   }
 
-  @Test public void testAddShapeV() {
+  @Test public void testAddShapesAndCommands () {
     initializeTestEnvironment();
     base.addShape(r_1);
-    base.addShape(e_1);
-    assertEquals("Rectangle\n" + "Ellipse\n", base.getShapes());
+    base.addShape(e_2);
+    base.addCommands(r_1, c1);
+    base.addCommands(r_1, c7);
+    base.addCommands(e_2, c1);
+    base.addCommands(e_2, c7);
+    assertEquals("Rectangle\nEllipse\n", base.getCommands());
   }
-
 }
