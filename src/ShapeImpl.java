@@ -51,13 +51,22 @@ public abstract class ShapeImpl implements ShapeInt{
   public static void main(String[] args) {
     ShapeImpl s = new Rectangle(0, 200, 50, 100, 255, 0,  0, 50,
     70);
-    Command c = new Command(255, 200, 50, 100, 255, 0, 0, 50, 80);
+    Command c = new Command(255, 200, 50, 100, 255, 0, 0, 51, 80);
+    Command c2 = new Command(200, 200, 50, 100, 255, 0, 0, 81, 90);
+    Command c3 = new Command(255, 200, 50, 100, 0, 0, 0, 82, 95);
+//    Command c
 //    s.addCommands(c);
     System.out.println(s.validCommand(c));
     s.addCommand(c);
-    System.out.println(s.getCommands());
+    System.out.println("First command list: \n" + s.getCommands());
+    s.addCommand(c2);
+    System.out.println("Second command list: \n" + s.getCommands());
+    s.addCommand(c3);
+    System.out.println("Third command list: \n" + s.getCommands());
 
 
+    //TODO: If a command is added that exceeds the given "appear" and "disappear" ticks, then you
+    //TODO: can delete the command at the prior appear or disappear ticks
   }
 
   /**
@@ -76,6 +85,16 @@ public abstract class ShapeImpl implements ShapeInt{
     if (!(validCommand(c))) {
       throw new IllegalArgumentException("Invalid command");
     }
+
+//    if (key <= commands.firstKey()) {
+//      commands.remove(commands.firstKey());
+//    }
+//
+//    if (key >= commands.lastKey()) {
+//      commands.remove(commands.lastKey());
+//    }
+
+    isCommandExisting(key, endKey);
 
     //TODO: Abstract this as a command?
     try {
@@ -115,7 +134,11 @@ public abstract class ShapeImpl implements ShapeInt{
     System.out.println(varsToChange);
 
     int deltaTime = endTime - startTime;
-    Integer key = commandList.firstKey();
+    Integer firstKey = commandList.firstKey();
+    Integer priorKey = firstKey;
+    Integer key = commandList.higherKey(firstKey);
+    Command add = commandList.get(firstKey);
+    System.out.println("firstkey: " + key);
     Color newColor;
     Position newPosition;
     Dimension newDimension;
@@ -123,42 +146,44 @@ public abstract class ShapeImpl implements ShapeInt{
     while (!(commandList.higherKey(key) == null)) {
       Command cmd = new Command(commandList.get(key));
       int nextKey = commandList.higherKey(key);
-//      System.out.println(nextKey + " key: " + key + " deltatime: " + deltaTime);
-      float deltaKey = nextKey - key;
+      System.out.println("Next key:" + nextKey + " key: " + key + " deltatime: " + deltaTime);
+      float deltaKey = key - priorKey;
 //      System.out.println(deltaKey);
       float multiplier = deltaKey / deltaTime;
       System.out.println(multiplier);
 
       if (varsToChange.contains(Variable.COLOR)) {
-        Float[] colorDiff = startCmd.getColor().colorDifference(endCmd.getColor());
-        newColor = updateToColor(colorDiff, multiplier);
+        Float[] colorDiff = endCmd.getColor().colorDifference(startCmd.getColor());
+        newColor = updateToColor(colorDiff, multiplier, add.getColor());
         cmd.setColor(newColor);
       }
 
       if (varsToChange.contains(Variable.POSITION)) {
-        Float[] positionDiff = startCmd.getPosition().positionDifference(endCmd.getPosition());
-        System.out.println(positionDiff[0] + " " + positionDiff[1] + " Multiplier: " + multiplier);
-//        newPosition = updateToPosition(positionDiff, multiplier,
-//          commandList.floorEntry(key).getValue().getPosition());
-//        cmd.setPosition(newPosition);
+        Float[] positionDiff = endCmd.getPosition().positionDifference(startCmd.getPosition());
+//        System.out.println(positionDiff[0] + " " + positionDiff[1] + " Multiplier: " + multiplier);
+        newPosition = updateToPosition(positionDiff, multiplier,
+          add.getPosition());
+        cmd.setPosition(newPosition);
       }
 
       if (varsToChange.contains(Variable.DIMENSION)) {
-        Float[] dimensionDiff = startCmd.getPosition().positionDifference(endCmd.getPosition());
-        newDimension = updateToDimension(dimensionDiff, multiplier);
+        Float[] dimensionDiff = endCmd.getPosition().positionDifference(startCmd.getPosition());
+        newDimension = updateToDimension(dimensionDiff, multiplier, add.getDimension());
         cmd.setDimension(newDimension);
       }
 
       commands.put(key, cmd);
+      priorKey = key;
+      add = cmd;
       key = nextKey;
     }
   }
 
-  public Color updateToColor(Float[] array, float multiplier) {
+  public Color updateToColor(Float[] array, float multiplier, Color nextKey) {
 
-    float changeR = multiplier * array[0];
-    float changeG = multiplier * array[1];
-    float changeB = multiplier * array[2];
+    float changeR = multiplier * array[0] + nextKey.getR();
+    float changeG = multiplier * array[1] + nextKey.getG();
+    float changeB = multiplier * array[2] + nextKey.getB();
 
     return new Color(changeR, changeG, changeB);
   }
@@ -166,8 +191,9 @@ public abstract class ShapeImpl implements ShapeInt{
 
   public Position updateToPosition(Float[] array, float multiplier, Position nextKey) {
 
+    System.out.println("Multiplier: " + multiplier + " X: " + array[0]);
     float changeX = (multiplier * array[0]) + nextKey.getX();
-    float changeY = multiplier * array[1 ]+ nextKey.getY();
+    float changeY = (multiplier * array[1]) + nextKey.getY();
 
     System.out.println(changeX + " " + changeY);
 
@@ -175,10 +201,10 @@ public abstract class ShapeImpl implements ShapeInt{
   }
 
 
-  public Dimension updateToDimension(Float[] array, float multiplier) {
+  public Dimension updateToDimension(Float[] array, float multiplier, Dimension nextKey) {
 
-    float changeW = multiplier * array[0];
-    float changeH = multiplier * array[1];
+    float changeW = multiplier * array[0] + nextKey.getW();
+    float changeH = multiplier * array[1] + nextKey.getH();
     System.out.println(changeW + " " + changeH);
 
     return new Dimension(changeW, changeH);
@@ -197,7 +223,7 @@ public abstract class ShapeImpl implements ShapeInt{
     Set<Integer> keys = commands.keySet();
     for (Integer key : keys) {
       sb.append(key);
-      sb.append("\n");
+      sb.append(" ");
       sb.append(commands.get(key).toStringV2());
       sb.append("\n");
     }
@@ -229,6 +255,7 @@ public abstract class ShapeImpl implements ShapeInt{
    */
    boolean validCommand(Command c) {
     int cKey = c.getT();
+
     Command startCommand1;
     Collection<Command> commandList = commands.values();
 
@@ -246,6 +273,8 @@ public abstract class ShapeImpl implements ShapeInt{
 
     for (Command command : commandList) {
       List<Variable> v1 = whatVarsChanging(command, commands.get(command.getEt()));
+//      System.out.println(isSameTimeFrame(command, c));
+//      System.out.println("isChangingSameVar: " + isChangingSameVar(v1, v2));
 
       if (isSameTimeFrame(command, c) && isChangingSameVar(v1, v2)) {
         return false;
@@ -253,6 +282,12 @@ public abstract class ShapeImpl implements ShapeInt{
     }
 
     return true;
+  }
+
+  private void isCommandExisting(int startTime, int endTime) {
+     if (!(commands.get(startTime) == null) || !(commands.get(endTime) == null)) {
+       throw new IllegalArgumentException("There is a command that exists at that tick already.");
+     }
   }
 
   private boolean isChangingSameVar(List<Variable> v1, List<Variable> v2) {

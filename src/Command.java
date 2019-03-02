@@ -155,8 +155,6 @@ public class Command {
 
   public String toStringV2() {
     return "".join(" ",
-      String.valueOf(getT()),
-      String.valueOf(getEt()),
       getPosition().toStringV2(),
       getColor().toStringV2(),
       getDimension().toStringV2());
