@@ -100,6 +100,43 @@ public class AnimationModelImplTest {
     ShapeImpl r_1 = new Rectangle(10,0,10,10,10,10,-10);
   }
 
+  //Ellipse Constructor Tests
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeEllipseX() {
+    ShapeImpl e_1 = new Ellipse(-10,0,10,10,0,0,0);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeEllipseY() {
+    ShapeImpl e_1 = new Ellipse(10,-10,10,10,0,0,0);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeEllipseWidth() {
+    ShapeImpl r_1 = new Ellipse(10,0,-10,10,0,0,0);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeEllipseHeight() {
+    ShapeImpl r_1 = new Ellipse(10,0,10,-10,0,0,0);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeEllipseR() {
+    ShapeImpl r_1 = new Ellipse(10,0,10,10,-10,10,10);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeEllipseG() {
+    ShapeImpl r_1 = new Ellipse(10,0,10,10,10,-10,10);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeEllipseB() {
+    ShapeImpl r_1 = new Ellipse(10,0,10,10,10,10,-10);
+  }
+
+  //addCommand tests
   @Test (expected = IllegalArgumentException.class)
   public void testAddCommandsEdgeCaseI() {
     initializeTestEnvironment();
@@ -128,6 +165,7 @@ public class AnimationModelImplTest {
     assertEquals("",base.getCommands());
   }
 
+
   @Test (expected = IllegalArgumentException.class)
   public void testAddCommandsEdgeCaseIV() {
     initializeTestEnvironment();
@@ -155,8 +193,53 @@ public class AnimationModelImplTest {
     assertEquals("",base.getCommands());
   }
 
-  //addCommand
+  //Command Constructor Tests
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeCommandX() {
+    Command c_1 = new Command(-10,0,10,10,0,0,0,5,10);
+  }
 
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeCommandY() {
+    Command c_1 = new Command(10,-10,10,10,0,0,0,5,10);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeCommandWidth() {
+    Command c_1 = new Command(10,0,-10,10,0,0,0,5,10);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeCommandHeight() {
+    Command c_1 = new Command(10,0,10,-10,0,0,0,5,10);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeCommandR() {
+    Command c_1 = new Command(10,0,10,10,-10,10,10,5,10);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeCommandG() {
+    Command c_1 = new Command(10,0,10,10,10,-10,10,5,10);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeCommandB() {
+    Command c_1 = new Command(10,0,10,10,10,10,-10,5,10);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeCommandStart() {
+    Command c_1 = new Command(10,0,10,10,10,10,10,-5,10);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeCommandEnd() {
+    Command c_1 = new Command(10,0,10,10,10,10,10,5,-10);
+  }
+
+  //add shape tests
   @Test(expected = NullPointerException.class)
   public void testAddShapeII() {
     initializeTestEnvironment();
@@ -173,14 +256,12 @@ public class AnimationModelImplTest {
     assertEquals("Rectangle\nRectangle\n",base.getShapes());
   }
 
-  //getCommand
-
   @Test
   public void testAddShapeIV() {
     initializeTestEnvironment();
     base.addShape(r_1);
     base.addShape(r_3);
-    assertEquals("Rectangle\n" + "Rectangle",base.getShapes());
+    assertEquals("Rectangle\n" + "Rectangle\n",base.getShapes());
   }
 
   @Test
@@ -191,4 +272,5 @@ public class AnimationModelImplTest {
     assertEquals("Rectangle\n" + "Ellipse\n",base.getShapes());
   }
 
+  //
 }
