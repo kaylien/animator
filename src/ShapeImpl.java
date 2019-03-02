@@ -149,7 +149,7 @@ public abstract class ShapeImpl implements ShapeInt{
   }
 
   private enum Variable {
-    COLOR, DIMENSION, POSITION;
+    COLOR, DIMENSION, POSITION,INVALID; //Added Invalid for varsChanging function
   }
 
   /**
@@ -171,10 +171,10 @@ public abstract class ShapeImpl implements ShapeInt{
       List<Variable> v1 = whatVarsChanging(command, nextCmd);
       
       if (isSameTimeFrame(command, c) && isChangingSameVar(v1, v2)) {
-        return true;
+        return false;
       }
     }
-    return false;
+    return true;
   }
 
   private boolean isChangingSameVar(List<Variable> v1, List<Variable> v2) {
@@ -182,7 +182,7 @@ public abstract class ShapeImpl implements ShapeInt{
       v1.contains(Variable.POSITION) && v2.contains(Variable.POSITION) ||
       v1.contains(Variable.DIMENSION) && v2.contains(Variable.DIMENSION);
   }
-
+/**
   static private List<Variable> whatVarsChanging(Command c1, Command c2) {
     List<Variable> list = new ArrayList<>();
     if(c1.getColor() != c2.getColor()) {
@@ -196,7 +196,7 @@ public abstract class ShapeImpl implements ShapeInt{
     }
     return list;
   }
-
+*/
   /**
   public void deleteCommands(Command... command) {
     int n = command.length;
@@ -212,8 +212,39 @@ public abstract class ShapeImpl implements ShapeInt{
     int c2st = c2.getT();
     int c2et = c2.getEt();
 
-    return (c1et > c2st && c1st < c2st) || (c1st > c2st && c1st < c2et) ||
-      (c1st > c2st && c1et < c2et) || (c1st < c2st && c1et > c2et);
+    return
+      (c1st >= c1st && c1et <= c2et)  //
+        || (c1st >= c2st && c1et >= c2et)
+        || (c1st <= c2st && c1et >= c2et)
+        || (c1st <= c2st && c1et <= c2et);
+  }
+
+  static private List<Variable> whatVarsChanging(Command c1, Command c2) {
+    List<Variable> list = new ArrayList<>();
+    if(!c1.getColor().equals(c2.getColor())) {
+      list.add(Variable.COLOR);
+    }
+
+    if(c1.getColor().equals(c2.getColor())) {
+      list.add(Variable.INVALID);
+    }
+
+    if(!c1.getPosition().equals(c2.getPosition())) {
+      list.add(Variable.POSITION);
+    }
+
+    if(c1.getPosition().equals(c2.getPosition())) {
+      list.add(Variable.INVALID);
+    }
+
+    if(!c1.getDimension().equals(c2.getDimension())) {
+      list.add(Variable.DIMENSION);
+    }
+
+    if(c1.getDimension().equals(c2.getDimension())) {
+      list.add(Variable.INVALID);
+    }
+    return list;
   }
 
 }

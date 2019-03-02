@@ -51,9 +51,9 @@ public class AnimationModelImplTest {
 
     Command c1 = new Command(0, 10, 10, 10, 0, 0, 0, 0, 10);
     Command c2 = new Command(0, 5, 10, 10, 0, 0, 0, 5, 15);
-    Command c3 = new Command(0, 20, 10, 10, 0, 0, 0, 0, 5);
+    Command c3 = new Command(0, 5, 10, 10, 0, 0, 0, 0, 5);
     Command c4 = new Command(0, 10, 10, 10, 0, 0, 0, 5, 10);
-    Command c5 = new Command(0, 25, 10, 10, 0, 0, 0, 6, 10);
+    Command c5 = new Command(0, 10, 10, 10, 0, 0, 0, 6, 10);
     Command c6 = new Command(0, 15, 10, 10, 0, 0, 0, 1, 9);
     Command c7 = new Command(0, 10, 10, 10, 0, 10, 10, 0, 10);
 
