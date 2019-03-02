@@ -1,5 +1,6 @@
 /**
- * The AnimationModel represents all the different states of Shapes in different time periods.
+ * The Animation Model represents all the different states
+ * of an animation in across time periods.
  */
 public interface AnimationModel {
 

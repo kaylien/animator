@@ -11,6 +11,7 @@ public abstract class ShapeImpl implements ShapeInt{
   private Position position;
   private Dimension dimension;
   private TreeMap<Integer, Command> commands;
+
   /**
    *
    * @param x
@@ -49,6 +50,9 @@ public abstract class ShapeImpl implements ShapeInt{
 
 
   private void addCommand (Command c) {
+    if (c == null) {
+      throw new IllegalArgumentException("Command is null");
+    }
     int key = c.getT();
     int endKey = c.getEt();
     /**

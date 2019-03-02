@@ -207,6 +207,13 @@ public class AnimationModelImplTest {
     base.addCommands(r_1, c1);
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testNullCommand () {
+    initializeTestEnvironment ();
+    base.addShape(r_1);
+    base.addCommands(r_1, null);
+  }
+
   @Test public void testAddCommandsPassNonConflictingPeriods () {
     initializeTestEnvironment ();
     base.addShape(r_1);
@@ -229,7 +236,7 @@ public class AnimationModelImplTest {
     assertEquals("", base.getShapes());
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testNullShape() {
     initializeTestEnvironment();
     base.addShape(r_1);

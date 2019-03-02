@@ -1,7 +1,9 @@
 import java.util.List;
 
 /**
- * Cannot have a Color with params outside of 0 and 255
+ * Invariants:
+ * - No negative arguments
+ * - Color values between 0 and 255 (ENFORCED by throwing IllegalArgument Exceptions)
  */
 public class Color {
   private float r, g, b;
