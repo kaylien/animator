@@ -59,7 +59,7 @@ public class Command {
    * @param et end tick
    */
   public Command(int x, int y, int w, int h, int r, int g, int b, int t, int et) {
-    if (et < 0 || t < 0) {
+    if (et < 0 || t < 0 || x < 0 || y < 0) {
       throw new IllegalArgumentException("Cannot create a command with start or end time" +
         " less than 0.");
     }

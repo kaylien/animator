@@ -1,6 +1,8 @@
+/**
+ * The Animation Model represents all the different states
+ * of an animation in across time periods.
+ */
 public interface AnimationModel {
-
-
 
   /**
    * Adds commands to a shape in the shape universe.
