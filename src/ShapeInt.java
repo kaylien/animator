@@ -46,7 +46,7 @@ public interface ShapeInt {
    * Adds a list of commands to a Shape
    * @param commands the list of commands to be executed
    */
-//  public void addCommands(Command... commands);
+  public void addCommands(Command... commands);
 
 
 

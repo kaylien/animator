@@ -74,6 +74,8 @@ public class Color {
   }
 
   public String toStringV2() {
-    return "".join(" ",String.valueOf(r),String.valueOf(g),String.valueOf(b));
+    return String.format("%-4s %-4s %-4s",String.valueOf(Math.round(r)),
+      String.valueOf(Math.round(g)), String.valueOf(Math.round(b)));
+//    return "".join("   ");
   }
 }

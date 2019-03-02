@@ -36,7 +36,8 @@ public class Position {
   }
 
   public String toStringV2() {
-    return "".join(" ",String.valueOf(x),String.valueOf(y));
+    return String.format("%-4s %-4s", String.valueOf(Math.round(x)),String.valueOf(Math.round(y)));
+//    return "".join("   ",);
   }
 
 }

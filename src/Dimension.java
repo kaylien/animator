@@ -46,7 +46,8 @@ public class Dimension {
   }
 
   public String toStringV2() {
-    return "".join(" ",String.valueOf(w),String.valueOf(h));
+    return String.format("%-4s %-4s", String.valueOf(Math.round(w)),String.valueOf(Math.round(h)));
+//    return "".join("   ",String.valueOf(Math.round(w)),String.valueOf(Math.round(h)));
   }
 
 }

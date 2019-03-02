@@ -30,14 +30,28 @@ public class AnimationModelImpl implements AnimationModel {
   @Override
   public String getCommands() {
     StringBuilder sb = new StringBuilder();
-    String heading = "st et x y w h r g b\n";
-    String lines = "----------------------\n";
+    String heading = String.format("%-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s",
+      "t", "x", "y", "w", "h", "r", "g", "b");
+    String lines = "-------------------------------------      " +
+      " -------------------------------------\n";
+//    for (ShapeImpl shape : shapeList) {
+//      sb.append(shape.toString());
+//      sb.append("\n");
+//      sb.append(heading);
+//      sb.append(shape.getCommands());
+//    }
+
     for (ShapeImpl shape : shapeList) {
+      sb.append("shape ");
       sb.append(shape.toString());
       sb.append("\n");
       sb.append(heading);
+      sb.append("      ");
+      sb.append(heading);
+      sb.append("\n");
       sb.append(lines);
-      sb.append(shape.getCommands());
+      sb.append(String.format("%s", shape.getCommands()));
+      sb.append("\n");
     }
     return sb.toString();
   }

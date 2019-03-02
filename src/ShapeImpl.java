@@ -210,22 +210,27 @@ public abstract class ShapeImpl implements ShapeInt{
     return new Dimension(changeW, changeH);
   }
 
-//  public void addCommands(Command... commands) {
-//    for(Command command: commands) {
-//      addCommand(command);
-//    }
-//  }
+  public void addCommands(Command... commands) {
+    for(Command command: commands) {
+      addCommand(command);
+    }
+  }
   
 
   public String getCommands() {
     StringBuilder sb = new StringBuilder();
     Collection<Command> values = commands.values();
     Set<Integer> keys = commands.keySet();
-    for (Integer key : keys) {
-      sb.append(key);
-      sb.append(" ");
+    Integer key = commands.firstKey();
+    while (!(commands.higherKey(key) == null)) {
+      int nextKey = commands.higherKey(key);
+      sb.append(String.format("%-4s ", key.toString()));
       sb.append(commands.get(key).toStringV2());
+      sb.append("      ");
+      sb.append(String.format("%-4s", key.toString()));
+      sb.append(commands.get(nextKey).toStringV2());
       sb.append("\n");
+      key = nextKey;
     }
 
     //TODO: Edit this, just testing rn
@@ -238,7 +243,7 @@ public abstract class ShapeImpl implements ShapeInt{
   }
 
   private enum Variable {
-    COLOR, DIMENSION, POSITION,INVALID; //Added Invalid for varsChanging function
+    COLOR, DIMENSION, POSITION
   }
 
   /**
@@ -249,7 +254,6 @@ public abstract class ShapeImpl implements ShapeInt{
    * time frame are changing the same variables. Each command stores an end time, so what's
    * determining the changing variables are comparing that start command to its end command.
    *
-   * OK for the context of this assignment, the user will add all of their commands at once
    * @param c
    * @return
    */
@@ -273,8 +277,6 @@ public abstract class ShapeImpl implements ShapeInt{
 
     for (Command command : commandList) {
       List<Variable> v1 = whatVarsChanging(command, commands.get(command.getEt()));
-//      System.out.println(isSameTimeFrame(command, c));
-//      System.out.println("isChangingSameVar: " + isChangingSameVar(v1, v2));
 
       if (isSameTimeFrame(command, c) && isChangingSameVar(v1, v2)) {
         return false;
@@ -295,21 +297,6 @@ public abstract class ShapeImpl implements ShapeInt{
       v1.contains(Variable.POSITION) && v2.contains(Variable.POSITION) ||
       v1.contains(Variable.DIMENSION) && v2.contains(Variable.DIMENSION);
   }
-/**
-  static private List<Variable> whatVarsChanging(Command c1, Command c2) {
-    List<Variable> list = new ArrayList<>();
-    if(c1.getColor() != c2.getColor()) {
-      list.add(Variable.COLOR);
-    }
-    if(c1.getPosition() != c2.getPosition()) {
-      list.add(Variable.POSITION);
-    }
-    if(c1.getDimension() != c2.getDimension()) {
-      list.add(Variable.DIMENSION);
-    }
-    return list;
-  }
-*/
   /**
   public void deleteCommands(Command... command) {
     int n = command.length;

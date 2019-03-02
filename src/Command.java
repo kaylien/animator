@@ -154,6 +154,8 @@ public class Command {
 
 
   public String toStringV2() {
+
+//    String.format("%-4s%-4s%-4s%-4s%-4s%-4s%-4s%-4s", )
     return "".join(" ",
       getPosition().toStringV2(),
       getColor().toStringV2(),
