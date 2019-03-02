@@ -33,10 +33,11 @@ public abstract class ShapeImpl implements ShapeInt{
     this.position = new Position(x, y);
     this.dimension = new Dimension(w, h);
     commands = new TreeMap<>();
-    // Going to add a new shape to the model, and it automatically creates an initialize command
-    // then you can pick a shape to continue to add commands to
-    Command cmd = new Command(x, y, w, h, r, g, b, appears, 0);
+    // Going to add a new shape to the model, and it automatically creates an command for
+    // initialization then you can pick a shape to continue to add commands to
+    Command cmd = new Command(x, y, w, h, r, g, b, appears, disappears);
     commands.put(appears, cmd);
+    commands.put(disappears, cmd);
   }
 
   // Copy constructor
@@ -58,10 +59,11 @@ public abstract class ShapeImpl implements ShapeInt{
    * Puts in command with a key at the start and end time.
    * @param c
    */
-  private void addCommand (Command c) {
+  private void addCommand (Command c, Variable v) {
     if (c == null) {
       throw new IllegalArgumentException("Command is null");
     }
+
     int key = c.getT();
     int endKey = c.getEt();
 
@@ -78,6 +80,17 @@ public abstract class ShapeImpl implements ShapeInt{
 //    fixCommands(key, endKey);
   }
 
+  /**
+   * Changing the variables in between the new command and its end time to reflect the mid-stages
+   * of the mutating variable values
+   *
+   * Additionally, after the end time, the start point of the changed variable for the following
+   * commands will have to be altered to avoid things like 'suddenly' transporting across the grid
+   * or a random change of color. Once another command begins changing that variable, stop changing
+   * the start point
+   * @param startTime
+   * @param endTime
+   */
   private void fixCommands(int startTime, int endTime) {
     NavigableMap<Integer, Command> commandList = commands.subMap(startTime,true,
       endTime, true);
@@ -145,11 +158,11 @@ public abstract class ShapeImpl implements ShapeInt{
     return new Dimension(changeX, changeY);
   }
 
-  public void addCommands(Command... commands) {
-    for(Command command: commands) {
-      addCommand(command);
-    }
-  }
+//  public void addCommands(Command... commands) {
+//    for(Command command: commands) {
+//      addCommand(command);
+//    }
+//  }
   
 
   public String getCommands() {
@@ -173,27 +186,29 @@ public abstract class ShapeImpl implements ShapeInt{
    * It's iterating through the existing list of commands, to check if the ones with an overlapping
    * time frame are changing the same variables. Each command stores an end time, so what's
    * determining the changing variables are comparing that start command to its end command.
+   *
+   * OK for the context of this assignment, the user will add all of their commands at once
    * @param c
    * @return
    */
   private boolean validCommand(Command c) {
-    //getting the endstate
-    Command endCmd = commands.get(c.getEt());
-    if (endCmd == null) {
-      return true;
-    }
+    int cKey = c.getT();
+    Command startCommand1;
+    Collection<Command> commandList = commands.values();
 
-    List<Variable> v2 = whatVarsChanging(c, commands.get(c.getEt()));
+    // Trying to find the variables changing between the existing state of the shape at the start
+    // time, and comparing it to the given command
+    startCommand1 = commands.floorEntry(cKey).getValue();
+    List<Variable> v2 = whatVarsChanging(startCommand1, c);
 
-    for (int key = 0; key < commands.size() - 1; key++) {
-      Command command = commands.get(key);
-      Command nextCmd = commands.get(key + 1);
-      List<Variable> v1 = whatVarsChanging(command, nextCmd);
-      
+    for (Command command : commandList) {
+      List<Variable> v1 = whatVarsChanging(command, commands.get(command.getEt()));
+
       if (isSameTimeFrame(command, c) && isChangingSameVar(v1, v2)) {
         return false;
       }
     }
+
     return true;
   }
 
@@ -232,11 +247,16 @@ public abstract class ShapeImpl implements ShapeInt{
     int c2st = c2.getT();
     int c2et = c2.getEt();
 
-    return
-      (c1st >= c1st && c1et <= c2et)  //
-        || (c1st >= c2st && c1et >= c2et)
-        || (c1st <= c2st && c1et >= c2et)
-        || (c1st <= c2st && c1et <= c2et);
+
+    return (c1et >= c2st && c1st <= c2st) || (c1st >= c2st && c1st <= c2et) ||
+      (c1st >= c2st && c1et < c2et) || (c1st <= c2st && c1et >= c2et);
+
+    //this commented out return statement always returns true
+//    return
+//      (c1st >= c2st && c1et <= c2et)  //
+//        || (c1st >= c2st && c1et >= c2et)
+//        || (c1st <= c2st && c1et >= c2et)
+//        || (c1st <= c2st && c1et <= c2et);
   }
 
   static private List<Variable> whatVarsChanging(Command c1, Command c2) {
@@ -244,26 +264,13 @@ public abstract class ShapeImpl implements ShapeInt{
     if(!c1.getColor().equals(c2.getColor())) {
       list.add(Variable.COLOR);
     }
-
-    if(c1.getColor().equals(c2.getColor())) {
-      list.add(Variable.INVALID);
-    }
-
     if(!c1.getPosition().equals(c2.getPosition())) {
       list.add(Variable.POSITION);
     }
-
-    if(c1.getPosition().equals(c2.getPosition())) {
-      list.add(Variable.INVALID);
-    }
-
     if(!c1.getDimension().equals(c2.getDimension())) {
       list.add(Variable.DIMENSION);
     }
 
-    if(c1.getDimension().equals(c2.getDimension())) {
-      list.add(Variable.INVALID);
-    }
     return list;
   }
 
