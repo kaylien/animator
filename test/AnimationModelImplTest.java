@@ -121,16 +121,7 @@ public class AnimationModelImplTest {
 
   //addCommand
 
-  //addShape
-  @Test (expected = NullPointerException.class)
-  public void testAddShapeI() {
-    initializeTestEnvironment();
-    base.addShape(r_1);
-    base.addShape(null);
-    assertEquals("",base.getCommands());
-  }
-
-  @Test
+  @Test(expected = NullPointerException.class)
   public void testAddShapeII() {
     initializeTestEnvironment();
     base.addShape(r_1);
@@ -143,7 +134,7 @@ public class AnimationModelImplTest {
     initializeTestEnvironment();
     base.addShape(r_1);
     base.addShape(r_4);
-    assertEquals("Rectangle\nRectangle\n",base.getCommands());
+    assertEquals("Rectangle\nRectangle\n",base.getShapes());
   }
 
   //getCommand
