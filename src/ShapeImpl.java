@@ -142,6 +142,7 @@ public abstract class ShapeImpl implements ShapeInt{
     Collection<Command> values = commands.values();
     for (Command c : values) {
       sb.append(c.toStringV2());
+      sb.append("\n");
     }
     return sb.toString();
   }
@@ -183,13 +184,13 @@ public abstract class ShapeImpl implements ShapeInt{
 
   static private List<Variable> whatVarsChanging(Command c1, Command c2) {
     List<Variable> list = new ArrayList<>();
-    if(c1.getColor() == c2.getColor()) {
+    if(c1.getColor() != c2.getColor()) {
       list.add(Variable.COLOR);
     }
-    if(c1.getPosition() == c2.getPosition()) {
+    if(c1.getPosition() != c2.getPosition()) {
       list.add(Variable.POSITION);
     }
-    if(c1.getDimension() == c2.getDimension()) {
+    if(c1.getDimension() != c2.getDimension()) {
       list.add(Variable.DIMENSION);
     }
     return list;
