@@ -210,11 +210,11 @@ public abstract class ShapeImpl implements ShapeInt{
     return new Dimension(changeW, changeH);
   }
 
-//  public void addCommands(Command... commands) {
-//    for(Command command: commands) {
-//      addCommand(command);
-//    }
-//  }
+  public void addCommands(Command... commands) {
+    for(Command command: commands) {
+      addCommand(command);
+    }
+  }
   
 
   public String getCommands() {
