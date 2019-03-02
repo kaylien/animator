@@ -7,5 +7,7 @@ public class Ellipse extends ShapeImpl {
     super(x, y, w, h, r, g, b);
   }
 
-
+ @Override public String toString() {
+   return "Ellipse";
+ }
 }

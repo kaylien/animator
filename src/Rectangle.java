@@ -5,4 +5,7 @@ public class Rectangle extends ShapeImpl{
     super(x, y, w, h, r, g, b);
   }
 
+  @Override public String toString() {
+    return "Rectangle";
+  }
 }
