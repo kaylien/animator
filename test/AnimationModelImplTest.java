@@ -8,36 +8,36 @@ import static junit.framework.TestCase.assertEquals;
 public class AnimationModelImplTest {
   AnimationModel base = new AnimationModelImpl();
 
-  ShapeImpl r_1 = new Rectangle(0, 0, 10, 10, 0, 0, 0,0,20);
+  ShapeImpl r_1;
   //ShapeImpl r_2 = new Rectangle(20, 30, 40, 10, 100, 200, 55);
   //ShapeImpl r_3 = new Rectangle(30, 40, 40, 10, 100, 200, 60);
-  ShapeImpl r_4 = new Rectangle(40, 50, 40, 10, 100, 200, 65,0,20);
+  ShapeImpl r_4;
 
-  //ShapeImpl e_1 = new Ellipse(0, 0, 40, 10, 100, 195, 50);
-  ShapeImpl e_2 = new Ellipse(10, 10, 40, 10, 100, 205, 55,0,20);
+  ShapeImpl e_1;
+  ShapeImpl e_2;
   //ShapeImpl e_3 = new Ellipse(20, 30, 40, 10, 100, 200, 60);
   //ShapeImpl e_4 = new Ellipse(40, 50, 40, 10, 100, 200, 65);
 
-  Command c1 = new Command(0, 10, 10, 10, 0, 0, 0, 0, 10);
-  Command c2 = new Command(0, 5, 10, 10, 0, 0, 0, 5, 15);
-  Command c3 = new Command(0, 20, 10, 10, 0, 0, 0, 0, 5);
-  Command c4 = new Command(0, 10, 10, 10, 0, 0, 0, 5, 10);
-  Command c5 = new Command(0, 25, 10, 10, 0, 0, 0, 5, 10);
-  Command c6 = new Command(0, 15, 10, 10, 0, 0, 0, 1, 9);
-  Command c7 = new Command(0, 10, 10, 10, 0, 10, 10, 0, 10);
+  Command c1;
+  Command c2;
+  Command c3;
+  Command c4;
+  Command c5;
+  Command c6;
+  Command c7;
 
-  Command cr1 = new Command(0, 10, 10, 10, 0, 15, 0, 0, 10);
-  Command cr2 = new Command(0, 5, 10, 10, 0, 10, 0, 5, 15);
+  Command cr1;
+  Command cr2;
   Command cr3 = new Command(0, 20, 10, 10, 0, 10, 0, 0, 5);
-  Command cr4 = new Command(0, 10, 10, 10, 0, 0, 0, 5, 10);
-  Command cr5 = new Command(0, 25, 10, 10, 0, 20, 0, 5, 10);
-  Command cr6 = new Command(0, 15, 10, 10, 0, 0, 0, 1, 9);
-  Command cr7 = new Command(0, 10, 10, 10, 0, 10, 10, 0, 10);
+  Command cr4;
+  Command cr5;
+  Command cr6;
+  Command cr7;
 
 
   public void initializeTestEnvironment() {
 
-    AnimationModel base = new AnimationModelImpl();
+    this.base = new AnimationModelImpl();
     AnimationModel addCommandPass = new AnimationModelImpl();
     AnimationModel addCommandFail = new AnimationModelImpl();
     AnimationModel addShapePass = new AnimationModelImpl();
@@ -47,31 +47,31 @@ public class AnimationModelImplTest {
     AnimationModel queryShapePass = new AnimationModelImpl();
     AnimationModel queryShapeFail = new AnimationModelImpl();
 
-    ShapeImpl r_1 = new Rectangle(0, 0, 10, 10, 0, 0, 0,0,20);
+    this.r_1 = new Rectangle(0, 0, 10, 10, 0, 0, 0,0,20);
     //ShapeImpl r_2 = new Rectangle(20, 30, 40, 10, 100, 200, 55);
     //ShapeImpl r_3 = new Rectangle(30, 40, 40, 10, 100, 200, 60);
-    ShapeImpl r_4 = new Rectangle(40, 50, 40, 10, 100, 200, 65,0,20);
+    this.r_4 = new Rectangle(40, 50, 40, 10, 100, 200, 65,0,20);
 
-    //ShapeImpl e_1 = new Ellipse(0, 0, 40, 10, 100, 195, 50);
-    ShapeImpl e_2 = new Ellipse(10, 10, 40, 10, 100, 205, 55,0,20);
+    this.e_1 = new Ellipse(0, 0, 40, 10, 100, 195, 50,0,20);
+    this.e_2 = new Ellipse(10, 10, 40, 10, 100, 205, 55,0,20);
     //ShapeImpl e_3 = new Ellipse(20, 30, 40, 10, 100, 200, 60);
     //ShapeImpl e_4 = new Ellipse(40, 50, 40, 10, 100, 200, 65);
 
-    Command c1 = new Command(0, 10, 10, 10, 0, 0, 0, 0, 10);
-    Command c2 = new Command(0, 5, 10, 10, 0, 0, 0, 5, 15);
-    Command c3 = new Command(0, 5, 10, 10, 0, 0, 0, 0, 5);
-    Command c4 = new Command(0, 10, 10, 10, 0, 0, 0, 5, 10);
-    Command c5 = new Command(0, 10, 10, 10, 0, 0, 0, 6, 10);
-    Command c6 = new Command(0, 15, 10, 10, 0, 0, 0, 1, 9);
-    Command c7 = new Command(0, 10, 10, 10, 0, 10, 10, 0, 10);
+    this.c1 = new Command(0, 10, 10, 10, 0, 0, 0, 0, 10);
+    this.c2 = new Command(0, 5, 10, 10, 0, 0, 0, 5, 15);
+    this.c3 = new Command(0, 5, 10, 10, 0, 0, 0, 0, 5);
+    this.c4 = new Command(0, 10, 10, 10, 0, 0, 0, 5, 10);
+    this.c5 = new Command(0, 10, 10, 10, 0, 0, 0, 6, 10);
+    this.c6 = new Command(0, 15, 10, 10, 0, 0, 0, 1, 9);
+    this.c7 = new Command(0, 10, 10, 10, 0, 10, 10, 0, 10);
 
-    Command cr1 = new Command(0, 10, 10, 10, 0, 15, 0, 0, 10);
-    Command cr2 = new Command(0, 5, 10, 10, 0, 10, 0, 5, 15);
-    Command cr3 = new Command(0, 20, 10, 10, 0, 10, 0, 0, 5);
-    Command cr4 = new Command(0, 10, 10, 10, 0, 0, 0, 5, 10);
-    Command cr5 = new Command(0, 25, 10, 10, 0, 20, 0, 5, 10);
-    Command cr6 = new Command(0, 15, 10, 10, 0, 0, 0, 1, 9);
-    Command cr7 = new Command(0, 10, 10, 10, 0, 10, 10, 0, 10);
+    this.cr1 = new Command(0, 10, 10, 10, 0, 15, 0, 0, 10);
+    this.cr2 = new Command(0, 5, 10, 10, 0, 10, 0, 5, 15);
+    this.cr3 = new Command(0, 20, 10, 10, 0, 10, 0, 0, 5);
+    this.cr4 = new Command(0, 10, 10, 10, 0, 0, 0, 5, 10);
+    this.cr5 = new Command(0, 25, 10, 10, 0, 20, 0, 5, 10);
+    this.cr6 = new Command(0, 15, 10, 10, 0, 0, 0, 1, 9);
+    this.cr7 = new Command(0, 10, 10, 10, 0, 10, 10, 0, 10);
 
   }
 
@@ -281,7 +281,10 @@ public class AnimationModelImplTest {
     base.addCommands(r_1, c7);
     base.addCommands(e_2, c1);
     base.addCommands(e_2, c7);
-    assertEquals("Rectangle\nEllipse\n", base.getCommands());
+    assertEquals("Rectangle\n" + "st et x y w h r g b\n" + "----------------------\n"
+      + "0 0.0 0.0 0.0 0.0 0.0 10.0 10.0\n" + "20 0.0 0.0 0.0 0.0 0.0 10.0 10.0\n" + "Ellipse\n"
+      + "st et x y w h r g b\n" + "----------------------\n"
+      + "0 10.0 10.0 100.0 205.0 55.0 40.0 10.0\n" + "20 10.0 10.0 100.0 205.0 55.0 40.0 10.0\n", base.getCommands());
   }
 
   @Test public void testAddCommandsNonConflictingVariable () {
@@ -289,15 +292,16 @@ public class AnimationModelImplTest {
     base.addShape(r_1);
     base.addCommands(r_1, c1);
     base.addCommands(r_1, cr1);
-    assertEquals("Rectangle\nEllipse\n", base.getCommands());
+    assertEquals("Rectangle\n" + "st et x y w h r g b\n" + "----------------------\n"
+      + "0 0.0 0.0 0.0 0.0 0.0 10.0 10.0\n" + "20 0.0 0.0 0.0 0.0 0.0 10.0 10.0\n", base.getCommands());
   }
 
   @Test public void testAddCommandsNonConflictingVariableII () {
     initializeTestEnvironment();
     base.addShape(r_1);
-    base.addCommands(r_1, c1);
-    base.addCommands(r_1, cr2);
-    assertEquals("Rectangle\nEllipse\n", base.getCommands());
+    base.addCommands(r_1, c1, cr2);
+    assertEquals("Rectangle\n" + "st et x y w h r g b\n" + "----------------------\n"
+      + "0 0.0 0.0 0.0 0.0 0.0 10.0 10.0\n" + "20 0.0 0.0 0.0 0.0 0.0 10.0 10.0", base.getCommands());
   }
 
 }
