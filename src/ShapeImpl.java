@@ -22,7 +22,9 @@ public abstract class ShapeImpl implements ShapeInt{
    * @param b
    */
   ShapeImpl(int x, int y, int w, int h, int r, int g, int b) {
-
+    if (x < 0 || y < 0 || w < 0 || h < 0 || r < 0 || g < 0 || b < 0) {
+      throw new IllegalArgumentException("Cannot Use Negative Numbers");
+    }
     this.color = new Color(r, g, b);
     this.position = new Position(x, y);
     this.dimension = new Dimension(w, h);

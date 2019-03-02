@@ -64,6 +64,42 @@ public class AnimationModelImplTest {
 
   }
 
+  //Constructor Tests
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeRectangleX() {
+    ShapeImpl r_1 = new Rectangle(-10,0,10,10,0,0,0);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeRectangleY() {
+    ShapeImpl r_1 = new Rectangle(10,-10,10,10,0,0,0);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeRectangleWidth() {
+    ShapeImpl r_1 = new Rectangle(10,0,-10,10,0,0,0);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeRectangleHeight() {
+    ShapeImpl r_1 = new Rectangle(10,0,10,-10,0,0,0);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeRectangleR() {
+    ShapeImpl r_1 = new Rectangle(10,0,10,10,-10,10,10);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeRectangleG() {
+    ShapeImpl r_1 = new Rectangle(10,0,10,10,10,-10,10);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void negativeRectangleB() {
+    ShapeImpl r_1 = new Rectangle(10,0,10,10,10,10,-10);
+  }
+
   @Test (expected = IllegalArgumentException.class)
   public void testAddCommandsEdgeCaseI() {
     initializeTestEnvironment();

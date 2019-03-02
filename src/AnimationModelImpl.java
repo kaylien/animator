@@ -11,7 +11,6 @@ import java.util.Set;
 public class AnimationModelImpl implements AnimationModel {
   List<ShapeImpl> shapeList;
 
-
   AnimationModelImpl(){
     shapeList = new ArrayList<>();
   }
@@ -34,6 +33,7 @@ public class AnimationModelImpl implements AnimationModel {
     sb.append(heading);
     sb.append(lines);
     for (ShapeImpl shape : shapeList) {
+      sb.append(shape.toString());
       sb.append(shape.getCommands());
     }
     return sb.toString();
