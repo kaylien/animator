@@ -14,7 +14,7 @@ public abstract class ShapeImpl implements ShapeInt{
   private int appears, disappears;
 
   /**
-   *
+   * Constructor for ShapeImpl.
    * @param x
    * @param y
    * @param w
@@ -319,6 +319,12 @@ public abstract class ShapeImpl implements ShapeInt{
   }
    */
 
+  /**
+   * Checks a command and the previous command to see if they have overlapping time periods.
+   * @param c1 previous command
+   * @param c2 current command
+   * @return boolean
+   */
   private boolean isSameTimeFrame(Command c1, Command c2) {
     int c1st = c1.getT();
     int c1et = c1.getEt();
@@ -330,6 +336,12 @@ public abstract class ShapeImpl implements ShapeInt{
       (c1st >= c2st && c1et < c2et) || (c1st <= c2st && c1et >= c2et);
   }
 
+  /**
+   * Checks a command and the previous command to see what variables are changing.
+   * @param c1 previous command
+   * @param c2 current command
+   * @return List of Variables that are changing in the given time period.
+   */
   static private List<Variable> whatVarsChanging(Command c1, Command c2) {
     List<Variable> list = new ArrayList<>();
     if(!c1.getColor().equals(c2.getColor())) {

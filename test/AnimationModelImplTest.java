@@ -6,19 +6,17 @@ import static junit.framework.TestCase.assertEquals;
  * Created by echung326 on 3/1/19.
  */
 public class AnimationModelImplTest {
-/**
- * TODO: Will uncomment these out after I see if the new constructor for Shape actually works
   AnimationModel base = new AnimationModelImpl();
 
-  ShapeImpl r_1 = new Rectangle(0, 0, 10, 10, 0, 0, 0);
-  ShapeImpl r_2 = new Rectangle(20, 30, 40, 10, 100, 200, 55);
-  ShapeImpl r_3 = new Rectangle(30, 40, 40, 10, 100, 200, 60);
-  ShapeImpl r_4 = new Rectangle(40, 50, 40, 10, 100, 200, 65);
+  ShapeImpl r_1 = new Rectangle(0, 0, 10, 10, 0, 0, 0,0,20);
+  //ShapeImpl r_2 = new Rectangle(20, 30, 40, 10, 100, 200, 55);
+  //ShapeImpl r_3 = new Rectangle(30, 40, 40, 10, 100, 200, 60);
+  ShapeImpl r_4 = new Rectangle(40, 50, 40, 10, 100, 200, 65,0,20);
 
-  ShapeImpl e_1 = new Ellipse(0, 0, 40, 10, 100, 195, 50);
-  ShapeImpl e_2 = new Ellipse(10, 10, 40, 10, 100, 205, 55);
-  ShapeImpl e_3 = new Ellipse(20, 30, 40, 10, 100, 200, 60);
-  ShapeImpl e_4 = new Ellipse(40, 50, 40, 10, 100, 200, 65);
+  //ShapeImpl e_1 = new Ellipse(0, 0, 40, 10, 100, 195, 50);
+  ShapeImpl e_2 = new Ellipse(10, 10, 40, 10, 100, 205, 55,0,20);
+  //ShapeImpl e_3 = new Ellipse(20, 30, 40, 10, 100, 200, 60);
+  //ShapeImpl e_4 = new Ellipse(40, 50, 40, 10, 100, 200, 65);
 
   Command c1 = new Command(0, 10, 10, 10, 0, 0, 0, 0, 10);
   Command c2 = new Command(0, 5, 10, 10, 0, 0, 0, 5, 15);
@@ -27,6 +25,15 @@ public class AnimationModelImplTest {
   Command c5 = new Command(0, 25, 10, 10, 0, 0, 0, 5, 10);
   Command c6 = new Command(0, 15, 10, 10, 0, 0, 0, 1, 9);
   Command c7 = new Command(0, 10, 10, 10, 0, 10, 10, 0, 10);
+
+  Command cr1 = new Command(0, 10, 10, 10, 0, 15, 0, 0, 10);
+  Command cr2 = new Command(0, 5, 10, 10, 0, 10, 0, 5, 15);
+  Command cr3 = new Command(0, 20, 10, 10, 0, 10, 0, 0, 5);
+  Command cr4 = new Command(0, 10, 10, 10, 0, 0, 0, 5, 10);
+  Command cr5 = new Command(0, 25, 10, 10, 0, 20, 0, 5, 10);
+  Command cr6 = new Command(0, 15, 10, 10, 0, 0, 0, 1, 9);
+  Command cr7 = new Command(0, 10, 10, 10, 0, 10, 10, 0, 10);
+
 
   public void initializeTestEnvironment() {
 
@@ -40,15 +47,15 @@ public class AnimationModelImplTest {
     AnimationModel queryShapePass = new AnimationModelImpl();
     AnimationModel queryShapeFail = new AnimationModelImpl();
 
-    ShapeImpl r_1 = new Rectangle(0, 0, 10, 10, 0, 0, 0);
-    ShapeImpl r_2 = new Rectangle(20, 30, 40, 10, 100, 200, 55);
-    ShapeImpl r_3 = new Rectangle(30, 40, 40, 10, 100, 200, 60);
-    ShapeImpl r_4 = new Rectangle(40, 50, 40, 10, 100, 200, 65);
+    ShapeImpl r_1 = new Rectangle(0, 0, 10, 10, 0, 0, 0,0,20);
+    //ShapeImpl r_2 = new Rectangle(20, 30, 40, 10, 100, 200, 55);
+    //ShapeImpl r_3 = new Rectangle(30, 40, 40, 10, 100, 200, 60);
+    ShapeImpl r_4 = new Rectangle(40, 50, 40, 10, 100, 200, 65,0,20);
 
-    ShapeImpl e_1 = new Ellipse(0, 0, 40, 10, 100, 195, 50);
-    ShapeImpl e_2 = new Ellipse(10, 10, 40, 10, 100, 205, 55);
-    ShapeImpl e_3 = new Ellipse(20, 30, 40, 10, 100, 200, 60);
-    ShapeImpl e_4 = new Ellipse(40, 50, 40, 10, 100, 200, 65);
+    //ShapeImpl e_1 = new Ellipse(0, 0, 40, 10, 100, 195, 50);
+    ShapeImpl e_2 = new Ellipse(10, 10, 40, 10, 100, 205, 55,0,20);
+    //ShapeImpl e_3 = new Ellipse(20, 30, 40, 10, 100, 200, 60);
+    //ShapeImpl e_4 = new Ellipse(40, 50, 40, 10, 100, 200, 65);
 
     Command c1 = new Command(0, 10, 10, 10, 0, 0, 0, 0, 10);
     Command c2 = new Command(0, 5, 10, 10, 0, 0, 0, 5, 15);
@@ -58,64 +65,72 @@ public class AnimationModelImplTest {
     Command c6 = new Command(0, 15, 10, 10, 0, 0, 0, 1, 9);
     Command c7 = new Command(0, 10, 10, 10, 0, 10, 10, 0, 10);
 
+    Command cr1 = new Command(0, 10, 10, 10, 0, 15, 0, 0, 10);
+    Command cr2 = new Command(0, 5, 10, 10, 0, 10, 0, 5, 15);
+    Command cr3 = new Command(0, 20, 10, 10, 0, 10, 0, 0, 5);
+    Command cr4 = new Command(0, 10, 10, 10, 0, 0, 0, 5, 10);
+    Command cr5 = new Command(0, 25, 10, 10, 0, 20, 0, 5, 10);
+    Command cr6 = new Command(0, 15, 10, 10, 0, 0, 0, 1, 9);
+    Command cr7 = new Command(0, 10, 10, 10, 0, 10, 10, 0, 10);
+
   }
 
   //Constructor Tests.
   @Test(expected = IllegalArgumentException.class) public void negativeRectangleX() {
-    ShapeImpl r_1 = new Rectangle(-10, 0, 10, 10, 0, 0, 0);
+    ShapeImpl r_1 = new Rectangle(-10, 0, 10, 10, 0, 0, 0,0,20);
   }
 
   @Test(expected = IllegalArgumentException.class) public void negativeRectangleY() {
-    ShapeImpl r_1 = new Rectangle(10, -10, 10, 10, 0, 0, 0);
+    ShapeImpl r_1 = new Rectangle(10, -10, 10, 10, 0, 0, 0,0,20);
   }
 
   @Test(expected = IllegalArgumentException.class) public void negativeRectangleWidth() {
-    ShapeImpl r_1 = new Rectangle(10, 0, -10, 10, 0, 0, 0);
+    ShapeImpl r_1 = new Rectangle(10, 0, -10, 10, 0, 0, 0,0,20);
   }
 
   @Test(expected = IllegalArgumentException.class) public void negativeRectangleHeight() {
-    ShapeImpl r_1 = new Rectangle(10, 0, 10, -10, 0, 0, 0);
+    ShapeImpl r_1 = new Rectangle(10, 0, 10, -10, 0, 0, 0,0,20);
   }
 
   @Test(expected = IllegalArgumentException.class) public void negativeRectangleR() {
-    ShapeImpl r_1 = new Rectangle(10, 0, 10, 10, -10, 10, 10);
+    ShapeImpl r_1 = new Rectangle(10, 0, 10, 10, -10, 10, 10,0,20);
   }
 
   @Test(expected = IllegalArgumentException.class) public void negativeRectangleG() {
-    ShapeImpl r_1 = new Rectangle(10, 0, 10, 10, 10, -10, 10);
+    ShapeImpl r_1 = new Rectangle(10, 0, 10, 10, 10, -10, 10,0,20);
   }
 
   @Test(expected = IllegalArgumentException.class) public void negativeRectangleB() {
-    ShapeImpl r_1 = new Rectangle(10, 0, 10, 10, 10, 10, -10);
+    ShapeImpl r_1 = new Rectangle(10, 0, 10, 10, 10, 10, -10,0,20);
   }
 
   //Ellipse Constructor Tests.
   @Test(expected = IllegalArgumentException.class) public void negativeEllipseX() {
-    ShapeImpl e_1 = new Ellipse(-10, 0, 10, 10, 0, 0, 0);
+    ShapeImpl e_1 = new Ellipse(-10, 0, 10, 10, 0, 0, 0,0,20);
   }
 
   @Test(expected = IllegalArgumentException.class) public void negativeEllipseY() {
-    ShapeImpl e_1 = new Ellipse(10, -10, 10, 10, 0, 0, 0);
+    ShapeImpl e_1 = new Ellipse(10, -10, 10, 10, 0, 0, 0,0,20);
   }
 
   @Test(expected = IllegalArgumentException.class) public void negativeEllipseWidth() {
-    ShapeImpl r_1 = new Ellipse(10, 0, -10, 10, 0, 0, 0);
+    ShapeImpl r_1 = new Ellipse(10, 0, -10, 10, 0, 0, 0,0,20);
   }
 
   @Test(expected = IllegalArgumentException.class) public void negativeEllipseHeight() {
-    ShapeImpl r_1 = new Ellipse(10, 0, 10, -10, 0, 0, 0);
+    ShapeImpl r_1 = new Ellipse(10, 0, 10, -10, 0, 0, 0,0,20);
   }
 
   @Test(expected = IllegalArgumentException.class) public void negativeEllipseR() {
-    ShapeImpl r_1 = new Ellipse(10, 0, 10, 10, -10, 10, 10);
+    ShapeImpl r_1 = new Ellipse(10, 0, 10, 10, -10, 10, 10,0,20);
   }
 
   @Test(expected = IllegalArgumentException.class) public void negativeEllipseG() {
-    ShapeImpl r_1 = new Ellipse(10, 0, 10, 10, 10, -10, 10);
+    ShapeImpl r_1 = new Ellipse(10, 0, 10, 10, 10, -10, 10,0,20);
   }
 
   @Test(expected = IllegalArgumentException.class) public void negativeEllipseB() {
-    ShapeImpl r_1 = new Ellipse(10, 0, 10, 10, 10, 10, -10);
+    ShapeImpl r_1 = new Ellipse(10, 0, 10, 10, 10, 10, -10,0,20);
   }
 
   //Command Constructor Tests.
@@ -267,5 +282,22 @@ public class AnimationModelImplTest {
     base.addCommands(e_2, c1);
     base.addCommands(e_2, c7);
     assertEquals("Rectangle\nEllipse\n", base.getCommands());
-  }**/
+  }
+
+  @Test public void testAddCommandsNonConflictingVariable () {
+    initializeTestEnvironment();
+    base.addShape(r_1);
+    base.addCommands(r_1, c1);
+    base.addCommands(r_1, cr1);
+    assertEquals("Rectangle\nEllipse\n", base.getCommands());
+  }
+
+  @Test public void testAddCommandsNonConflictingVariableII () {
+    initializeTestEnvironment();
+    base.addShape(r_1);
+    base.addCommands(r_1, c1);
+    base.addCommands(r_1, cr2);
+    assertEquals("Rectangle\nEllipse\n", base.getCommands());
+  }
+
 }
